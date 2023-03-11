@@ -14,6 +14,7 @@ function executeQuickPickOption(picked?: boolean) {
     alwaysShow: true,
     description: currentCommand.get(),
     picked,
+    isExecuteOption: true,
   } as const;
 }
 
@@ -23,6 +24,7 @@ function skipOptionQuickPickOption(type: "inputs" | "flags", picked?: boolean) {
     alwaysShow: true,
     description: currentCommand.get(),
     picked,
+    isSkipOption: true,
   } as const;
 }
 

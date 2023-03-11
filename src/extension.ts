@@ -6,12 +6,14 @@ import { selectCommand } from "./commands";
 import { currentCommand } from "./currentCommandStore";
 import { handleInputs } from "./inputs";
 import { initOutputChannel, logInfo } from "./logging";
+import { handleFlags } from './flags';
 
 async function createGHCommand() {
   try {
     const command = await selectCommand();
     const subcommand = await selectSubcommand(command);
     await handleInputs(subcommand);
+    await handleFlags(subcommand);
 
     logInfo(`Final command is: ${currentCommand.get()}`);
   } catch (e) {

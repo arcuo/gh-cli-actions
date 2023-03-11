@@ -5,9 +5,13 @@ export type Input = {
   required?: boolean;
 };
 
+type FlagName<TKey, TPrefix extends string = "-" | "--"> = TKey extends string
+  ? `${TPrefix}${TKey}`
+  : never;
+
 export type Flag = {
   description: string;
-  names: string[];
+  names: FlagName<string>[];
   input?: Input;
 };
 
