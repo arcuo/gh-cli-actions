@@ -14,10 +14,12 @@ export const LogType = {
   Warning: "Warning",
 } as const;
 
-type LogType = (typeof LogType)[keyof typeof LogType];
+type LogType = typeof LogType[keyof typeof LogType];
 
 export function log(message: string, type: LogType = LogType.Info) {
-  if (!outputChannel) return;
+  if (!outputChannel) {
+    return;
+  }
 
   outputChannel.appendLine(
     `[${type} - ${new Date().toTimeString()}] ${message}`

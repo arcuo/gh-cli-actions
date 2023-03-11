@@ -9,15 +9,16 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:gh-cli-actions.helloWorld"
-  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "gh-cli-actions.helloWorld",
-        "title": "Hello World"
+        "command": "gh-cli-actions.gh",
+        "title": "gh"
+      },
+      {
+        "command": "gh-cli-actions.gh-shortcut",
+        "title": "gh-shortcut: Create quick shortcuts for often used commands with gh using config .vscode settings file"
       }
     ]
   },
@@ -40,6 +41,6 @@
     "eslint": "^8.33.0",
     "glob": "^8.1.0",
     "mocha": "^10.1.0",
-    "typescript": "5.0.0-beta"
+    "typescript": "4.9.5"
   }
 }
