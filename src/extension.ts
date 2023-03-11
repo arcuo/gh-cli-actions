@@ -1,26 +1,9 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { selectSubcommand } from "./subcommand";
-import { selectCommand } from "./commands";
 import { currentCommand } from "./currentCommandStore";
-import { handleInputs } from "./inputs";
 import { initOutputChannel, logInfo } from "./logging";
-import { handleFlags } from './flags';
-
-async function createGHCommand() {
-  try {
-    const command = await selectCommand();
-    const subcommand = await selectSubcommand(command);
-    await handleInputs(subcommand);
-    await handleFlags(subcommand);
-
-    logInfo(`Final command is: ${currentCommand.get()}`);
-  } catch (e) {
-    console.error(e);
-    return;
-  }
-}
+import { createGHCommand, runCommand, runLastCommand } from "./runners";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -32,13 +15,25 @@ export function activate(context: vscode.ExtensionContext) {
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
 
-  logInfo(`Registering 'gh' command`);
-  const disposable = vscode.commands.registerCommand(
-    "gh-cli-actions.gh",
-    createGHCommand
+  logInfo(`Initiating Github CLI Actions`);
+  context.subscriptions.push(
+    vscode.commands.registerCommand("gh-cli-actions.gh-run", async () => {
+      const command = await createGHCommand();
+
+      if (!command) {
+        return;
+      }
+
+      runCommand(command);
+      currentCommand.reset();
+    })
   );
 
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(
+    vscode.commands.registerCommand("gh-cli-actions.gh-run-last", async () => {
+      runLastCommand();
+    })
+  );
 }
 
 // This method is called when your extension is deactivated

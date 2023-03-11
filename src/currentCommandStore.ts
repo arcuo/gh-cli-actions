@@ -5,7 +5,10 @@ class CurrentCommand {
     this.commandString = commandString || "gh";
   }
 
-  get() {
+  get(noGH?: boolean) {
+    if (noGH) {
+      return this.commandString.replace("gh ", "");
+    }
     return this.commandString;
   }
 

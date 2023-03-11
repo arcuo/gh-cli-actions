@@ -17,6 +17,7 @@ export async function selectSubcommand(command: GHCommand) {
 
   const items = Object.entries(subcommands).map(([name, subcommand]) => ({
     label: subcommand.usage,
+    name,
     ...subcommand,
   }));
 
@@ -29,6 +30,8 @@ export async function selectSubcommand(command: GHCommand) {
   if (!subcommand) {
     throw new Error("No sub command selected");
   }
+
+  currentCommand.add(subcommand.name);
 
   return subcommand;
 }
