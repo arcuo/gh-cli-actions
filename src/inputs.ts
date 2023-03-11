@@ -7,7 +7,7 @@ const pipe =
   (x: T) =>
     fns.reduce((v, [fn, doIt]) => (doIt ? fn(v) : v), x);
 
-function wrapWithQuotes(input: string) {
+export function wrapWithQuotes(input: string) {
   return `"${input}"`;
 }
 
@@ -19,11 +19,12 @@ function wrapWithSquareBrackets(input: string) {
   return `[${input}]`;
 }
 
-export const getInputName = (input: Input) => pipe(
-  [wrapWithQuotes, input.type === "string"],
-  [wrapWithBrackets, input.type === "shell"],
-  [wrapWithSquareBrackets, !!input.multiple]
-)(input.name);
+export const getInputName = (input: Input) =>
+  pipe(
+    [wrapWithQuotes, input.type === "string"],
+    [wrapWithBrackets, input.type === "shell"],
+    [wrapWithSquareBrackets, !!input.multiple]
+  )(input.name);
 
 async function writeInput(input: Input) {
   if (!input.name) {
@@ -32,14 +33,20 @@ async function writeInput(input: Input) {
 
   let inputName = getInputName(input);
 
-  const helper  = `${currentCommand.get()} ${inputName}`;
+  const helper = `${currentCommand.get()} ${inputName}`;
 
   const inputString = await window.showInputBox({
-    title: `Enter input ${helper} ${input.required ? "(required: true)" : "(Keep blank to skip input)"}`,
+    title: `Enter input ${helper} ${
+      input.required ? "(required: true)" : "(Keep blank to skip input)"
+    }`,
     placeHolder: input.name,
   });
 
-  return inputString;
+  if (!inputString) {
+    return;
+  }
+
+  return input.type === "string" ? wrapWithQuotes(inputString) : inputString;
 }
 
 export async function handleInputs(subcommand: Subcommand) {

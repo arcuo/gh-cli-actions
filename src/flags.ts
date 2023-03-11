@@ -1,7 +1,7 @@
 import { window } from "vscode";
 import { currentCommand } from "./currentCommandStore";
-import { Subcommand, Input, Flag } from "./gh.types";
-import { getInputName } from "./inputs";
+import { Flag, Subcommand } from "./gh.types";
+import { getInputName, wrapWithQuotes } from "./inputs";
 import { createQuickPickMenu } from "./quickpick";
 
 async function writeFlagInput(flag: Flag) {
@@ -16,12 +16,18 @@ async function writeFlagInput(flag: Flag) {
   let inputName = flag.input ? " " + getInputName(flag.input) : "";
   const helper = `${currentCommand.get()} --${longName}${inputName}`;
 
-  const flagString = await window.showInputBox({
+  const flagInputString = await window.showInputBox({
     title: `Enter flag input ${helper}`,
     placeHolder: longName,
   });
 
-  return flagString;
+  if (!flagInputString) {
+    return;
+  }
+
+  return flag.input?.type === "string"
+    ? wrapWithQuotes(flagInputString)
+    : flagInputString;
 }
 
 export async function handleFlags(subcommand: Subcommand) {
