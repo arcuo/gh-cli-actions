@@ -17,14 +17,23 @@ interface Package {
       {
         command: 'gh-cli-actions.gh-run-shortcut',
         title: 'gh: Run a gh command shortcut'
+      },
+      {
+        command: 'gh-cli-actions.gh-delete-shortcut',
+        title: 'gh: Run a gh command shortcut'
       }
     ],
     configuration: {
       title: 'Github CLI Actions',
       properties: {
         'gh-cli-actions.ghPath': {type: 'string', default: 'gh', description: 'Path to the gh executable'},
-        'gh-cli-actions.ghShortcuts': {type: 'array', default: [], description: 'List of gh command shortcuts'},
-        'gh-cli-actions.lastCommand': {type: 'string', description: 'Last command run'}
+        'gh-cli-actions.ghShortcuts': {
+          type: 'array',
+          default: [{command: 'gh pr list', name: 'List pull requests'}],
+          description: 'List of gh command shortcuts'
+        },
+        'gh-cli-actions.lastCommand': {type: 'string', description: 'Last command run'},
+        'gh-cli-actions.runInTerminal': {type: 'boolean', description: 'Run the command in a terminal'}
       }
     }
   },

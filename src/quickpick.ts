@@ -10,7 +10,7 @@ const quickPickOptionDefaults = {
 
 function executeQuickPickOption(picked?: boolean) {
   return {
-    label: `Execute command`,
+    label: `Finalise command`,
     alwaysShow: true,
     description: currentCommand.get(),
     picked,

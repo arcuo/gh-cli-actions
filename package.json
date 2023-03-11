@@ -22,11 +22,15 @@
       },
       {
         "command": "gh-cli-actions.gh-create",
-        "title": "gh: Create a gh command shortcut for the workspace"
+        "title": "gh: Create a gh command shortcut"
       },
       {
         "command": "gh-cli-actions.gh-run-shortcut",
         "title": "gh: Run a gh command shortcut"
+      },
+      {
+        "command": "gh-cli-actions.gh-delete-shortcut",
+        "title": "gh: Delete a gh command shortcut"
       }
     ],
     "configuration": {
@@ -39,12 +43,19 @@
         },
         "gh-cli-actions.ghShortcuts": {
           "type": "array",
-          "default": [],
+          "default": [{
+            "command": "gh pr list",
+            "name": "List pull requests"
+          }],
           "description": "List of gh command shortcuts"
         },
         "gh-cli-actions.lastCommand": {
           "type": "string",
           "description": "Last command run"
+        },
+        "gh-cli-actions.runInTerminal": {
+          "type": "boolean",
+          "description": "Run the command in a terminal"
         }
       }
     }

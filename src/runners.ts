@@ -10,6 +10,7 @@ import { logInfo } from "./logging";
 import { selectSubcommand } from "./subcommand";
 import * as vscode from "vscode";
 import { Config } from "./configs";
+import { createQuickPickMenu } from "./quickpick";
 
 export async function createGHCommand() {
   try {
@@ -79,7 +80,7 @@ export async function runCommand(command: string) {
 
 export async function runLastCommand() {
   const lastCommand = Config.get("lastCommand");
-  
+
   if (lastCommand) {
     runCommand(lastCommand);
   } else {
