@@ -11,6 +11,7 @@
     "url": "https://github.com/arcuo/gh-cli-actions/issues"
   },
   "author": "Benjamin Zachariae",
+  "publisher": "arcuo",
   "license": "MIT",
   "version": "1.0.0",
   "engines": {
@@ -97,7 +98,8 @@
     "lint": "eslint src --ext ts",
     "precompile": "npx ts-json-as-const ./package.json",
     "fetch-gh-info": "python3 ./scripts/fetch-gh-info.py",
-    "package": "pnpm vsce package --no-dependencies"
+    "package": "pnpm vsce package --no-dependencies",
+    "publish": "pnpm vsce publish --no-dependencies"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
