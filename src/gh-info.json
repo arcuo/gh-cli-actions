@@ -141,7 +141,7 @@
             "input": null
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -180,7 +180,7 @@
             "input": null
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           }
@@ -227,7 +227,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "repository name with owner: user/repo",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -274,7 +274,7 @@
             "input": { "name": "<login>", "type": "string" }
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -306,7 +306,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           }
@@ -323,7 +323,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           }
@@ -345,7 +345,7 @@
             "input": { "name": "<fields>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of codespaces to list",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -355,7 +355,7 @@
             "input": { "name": "<login>", "type": "string" }
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Repository name with owner: user/repo",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -387,7 +387,7 @@
             "input": null
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           }
@@ -414,7 +414,7 @@
             "input": { "name": "<fields>", "type": "string" }
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -441,7 +441,7 @@
             "input": null
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           }
@@ -485,7 +485,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -512,7 +512,7 @@
             "input": { "name": "<login>", "type": "string" }
           },
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Filter codespace selection by repository name (user/repo)",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -606,7 +606,7 @@
         "description": "List your gists",
         "flags": [
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of gists to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -672,7 +672,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--body-file"],
+            "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -724,7 +724,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--author"],
+            "names": ["-A", "--author"],
             "description": "Filter by author",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -744,7 +744,7 @@
             "input": { "name": "<strings>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of issues to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -759,7 +759,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--search"],
+            "names": ["-S", "--search"],
             "description": "Search issues with query",
             "input": { "name": "<query>", "type": "string" }
           },
@@ -834,7 +834,7 @@
             "input": { "name": "<text>", "type": "string" }
           },
           {
-            "names": ["-", "--body-file"],
+            "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -931,7 +931,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--body-file"],
+            "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -1073,7 +1073,7 @@
             "input": { "name": "<login>", "type": "string" }
           },
           {
-            "names": ["-", "--base"],
+            "names": ["-B", "--base"],
             "description": "The branch into which you want your code merged",
             "input": { "name": "<branch>", "type": "string" }
           },
@@ -1083,7 +1083,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--body-file"],
+            "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -1098,7 +1098,7 @@
             "input": null
           },
           {
-            "names": ["-", "--head"],
+            "names": ["-H", "--head"],
             "description": "The branch that contains commits for your pull request (default: current branch)",
             "input": { "name": "<branch>", "type": "string" }
           },
@@ -1160,12 +1160,12 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--author"],
+            "names": ["-A", "--author"],
             "description": "Filter by author",
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--base"],
+            "names": ["-B", "--base"],
             "description": "Filter by base branch",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -1175,7 +1175,7 @@
             "input": null
           },
           {
-            "names": ["-", "--head"],
+            "names": ["-H", "--head"],
             "description": "Filter by head branch",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -1195,12 +1195,12 @@
             "input": { "name": "<strings>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of items to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
           {
-            "names": ["-", "--search"],
+            "names": ["-S", "--search"],
             "description": "Search pull requests with query",
             "input": { "name": "<query>", "type": "string" }
           },
@@ -1354,7 +1354,7 @@
             "input": { "name": "<text>", "type": "string" }
           },
           {
-            "names": ["-", "--body-file"],
+            "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -1440,7 +1440,7 @@
             "input": { "name": "<login>", "type": "string" }
           },
           {
-            "names": ["-", "--base"],
+            "names": ["-B", "--base"],
             "description": "Change the base branch for this pull request",
             "input": { "name": "<branch>", "type": "string" }
           },
@@ -1450,7 +1450,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--body-file"],
+            "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -1517,7 +1517,7 @@
             "input": null
           },
           {
-            "names": ["-", "--author-email"],
+            "names": ["-A", "--author-email"],
             "description": "Email text for merge commit author",
             "input": { "name": "<text>", "type": "string" }
           },
@@ -1532,7 +1532,7 @@
             "input": { "name": "<text>", "type": "string" }
           },
           {
-            "names": ["-", "--body-file"],
+            "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -1631,7 +1631,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--body-file"],
+            "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -1732,7 +1732,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--notes-file"],
+            "names": ["-F", "--notes-file"],
             "description": "Read release notes from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -1779,7 +1779,7 @@
             "input": null
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of items to fetch",
             "input": { "name": "<int>", "type": "string" }
           }
@@ -1820,7 +1820,7 @@
         "description": "Download assets from a GitHub release.",
         "flags": [
           {
-            "names": ["-", "--archive"],
+            "names": ["-A", "--archive"],
             "description": "Download the source code archive in the specified format (zip or tar.gz)",
             "input": { "name": "<format>", "type": "string" }
           },
@@ -1830,12 +1830,12 @@
             "input": null
           },
           {
-            "names": ["-", "--dir"],
+            "names": ["-D", "--dir"],
             "description": "The directory to download files into",
             "input": { "name": "<directory>", "type": "string" }
           },
           {
-            "names": ["-", "--output"],
+            "names": ["-O", "--output"],
             "description": "The file to write a single asset to (use \"-\" to write to standard output)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -1877,7 +1877,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--notes-file"],
+            "names": ["-F", "--notes-file"],
             "description": "Read release notes from file (use \"-\" to read from standard input)",
             "input": { "name": "<file>", "type": "string" }
           },
@@ -2070,7 +2070,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of repositories to list",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -2295,7 +2295,7 @@
         "description": "Rename a GitHub repository.",
         "flags": [
           {
-            "names": ["-", "--repo"],
+            "names": ["-R", "--repo"],
             "description": "Select another repository using the [HOST/]OWNER/REPO format",
             "input": { "name": "<[HOST/]OWNER/REPO>", "type": "string" }
           },
@@ -2418,7 +2418,7 @@
         "description": "Download artifacts generated by a GitHub Actions workflow run.",
         "flags": [
           {
-            "names": ["-", "--dir"],
+            "names": ["-D", "--dir"],
             "description": "The directory to download artifacts into",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -2455,7 +2455,7 @@
             "input": { "name": "<fields>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of runs to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -2607,7 +2607,7 @@
             "input": null
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of workflows to fetch",
             "input": { "name": "<int>", "type": "string" }
           }
@@ -2625,7 +2625,7 @@
         "description": "Create a workflow_dispatch event for a given workflow.",
         "flags": [
           {
-            "names": ["-", "--field"],
+            "names": ["-F", "--field"],
             "description": "Add a string parameter in key=value format, respecting @ syntax",
             "input": { "name": "<key=value>", "type": "string" }
           },
@@ -2831,7 +2831,7 @@
             "input": { "name": "<strings>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of extensions to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -3010,7 +3010,7 @@
             "input": { "name": "<fields>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of labels to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -3020,7 +3020,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--search"],
+            "names": ["-S", "--search"],
             "description": "Search label names and descriptions",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -3107,7 +3107,7 @@
             "input": { "name": "<fields>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of commits to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -3244,7 +3244,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of results to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -3376,7 +3376,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--base"],
+            "names": ["-B", "--base"],
             "description": "Filter on base branch name",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -3411,7 +3411,7 @@
             "input": null
           },
           {
-            "names": ["-", "--head"],
+            "names": ["-H", "--head"],
             "description": "Filter on head branch name",
             "input": { "name": "<string>", "type": "string" }
           },
@@ -3446,7 +3446,7 @@
             "input": { "name": "<string>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of results to fetch",
             "input": { "name": "<int>", "type": "string" }
           },
@@ -3638,7 +3638,7 @@
             "input": { "name": "<strings>", "type": "string" }
           },
           {
-            "names": ["-", "--limit"],
+            "names": ["-L", "--limit"],
             "description": "Maximum number of repositories to fetch",
             "input": { "name": "<int>", "type": "string" }
           },

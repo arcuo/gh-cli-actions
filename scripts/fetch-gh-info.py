@@ -63,7 +63,7 @@ def getSubcommandInfo(subcommandDict, page):
         for flag in flags:
             name, description = flag
 
-            names = re.findall(r"(-?(?:-[a-z]*)+)", name)
+            names = re.findall(r"(-?(?:-[a-zA-Z]*)+)", name)
             inputs = getInputsfromString(name)
             input = None
             if len(inputs) == 1:
