@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0.2
+
+### Patch Changes
+
+- Fix missing capital flag names
+
 ## 1.0.1
 
 ### Patch Changes
