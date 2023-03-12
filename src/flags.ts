@@ -48,7 +48,6 @@ export async function handleFlags(subcommand: Subcommand) {
     const flag = await createQuickPickMenu(items, {
       title: "Select Flag",
       canExecute: true,
-      skipType: undefined,
       picked: "execute",
     });
 

@@ -139,6 +139,7 @@ export const GithubCLICommands: Commands = {
             input: {
               name: "int",
               type: "shell",
+              required: true,
             },
           },
           {
@@ -151,6 +152,7 @@ export const GithubCLICommands: Commands = {
             input: {
               name: "string",
               type: "shell",
+              required: true,
             },
           },
           {
@@ -175,6 +177,15 @@ export const GithubCLICommands: Commands = {
               required: true,
             },
           },
+          {
+            names: ["--topic"],
+            description: "Filter by topic",
+            input: {
+              name: "string",
+              type: "string",
+              required: true,
+            },
+          }
         ],
       },
     },

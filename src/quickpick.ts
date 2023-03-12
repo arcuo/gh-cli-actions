@@ -18,52 +18,30 @@ function executeQuickPickOption(picked?: boolean) {
   } as const;
 }
 
-function skipOptionQuickPickOption(type: "inputs" | "flags", picked?: boolean) {
-  return {
-    label: `Skip ${type}`,
-    alwaysShow: true,
-    description: currentCommand.get(),
-    picked,
-    isSkipOption: true,
-  } as const;
-}
-
 export async function createQuickPickMenu<
   TItem extends QuickPickItem,
   TCanExecute extends boolean,
-  TSkipType extends "inputs" | "flags" | undefined
 >(
   items: TItem[],
   options: {
     title: string;
     canExecute: TCanExecute;
     picked?: "execute" | "skip";
-    skipType: TSkipType;
   }
 ) {
-  const { canExecute, picked, skipType, title } = options;
+  const { canExecute, picked, title } = options;
 
   type ExecuteOption = TCanExecute extends false
     ? never
     : ReturnType<typeof executeQuickPickOption>;
 
-  type SkipOption = TSkipType extends undefined
-    ? never
-    : ReturnType<typeof skipOptionQuickPickOption>;
-
-  type OptionItems = (TItem | ExecuteOption | SkipOption)[];
+  type OptionItems = (TItem | ExecuteOption)[];
 
   const quickPickItems: OptionItems = [];
 
   if (canExecute) {
     quickPickItems.push(
       executeQuickPickOption(picked === "execute") as ExecuteOption
-    );
-  }
-
-  if (skipType !== undefined) {
-    quickPickItems.push(
-      skipOptionQuickPickOption(skipType, picked === "skip") as SkipOption
     );
   }
 

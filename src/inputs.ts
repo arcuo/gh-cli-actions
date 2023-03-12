@@ -67,7 +67,6 @@ async function selectOption(input: Input) {
   const option = await createQuickPickMenu(items, {
     title: `Select option for input ${helper}`,
     canExecute: false,
-    skipType: undefined,
   });
 
   if (!option) {
