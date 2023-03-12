@@ -32,3 +32,9 @@ This extension contributes the following settings:
 * `gh-cli-actions.lastCommand`: The last command to be run.
 * `gh-cli-actions.hideOptions`: List of commands to hide from the command input. This can be used to clear some clutter in the menu.
 * `gh-cli-actions.favorite`: List of commands to be sorted in the top of the command selection quick menu.
+
+## Potential future additions
+
+* Allow going back in a command (i.e. moving one step back in the command)
+* Allow adding inputs and/or flags to shortcuts. Allowing you to create shortcuts that you can still add input or flags to.
+* Grab specific options from manual scraping to allow inputs to have options.
