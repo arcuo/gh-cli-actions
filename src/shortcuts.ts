@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { Config } from "./configs";
-import { logAndInform } from "./logging";
+import { logAndInform, logAndInformError } from "./logging";
 import { createQuickPickMenu } from "./quickpick";
 import { createGHCommand, runCommand } from "./runners";
 
@@ -18,13 +18,19 @@ export async function createNewShortcut() {
   const shortcutCommand = await createGHCommand();
 
   if (!shortcutCommand) {
-    throw Error("No shortcut created");
+    logAndInformError("Shortcut creation cancelled");
+    throw Error("Shortcut creation cancelled");
   }
 
   const name = await vscode.window.showInputBox({
     prompt: "Enter a name for the shortcut",
     value: shortcutCommand,
   });
+
+  if (!name) {
+    logAndInformError("Shortcut creation cancelled");
+    throw Error("Shortcut creation cancelled");
+  }
 
   const shortcuts = Config.get("ghShortcuts") ?? [];
 
