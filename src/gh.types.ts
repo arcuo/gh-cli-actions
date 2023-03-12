@@ -2,6 +2,7 @@ export type Input = {
   name: string;
   type: "string" | "shell";
   multiple?: boolean;
+  options?: string[];
   required?: boolean;
 };
 
@@ -89,6 +90,90 @@ export const GithubCLICommands: Commands = {
             name: "repository",
             type: "shell",
             required: true,
+          },
+          {
+            name: "directory",
+            type: "shell",
+            multiple: true,
+          },
+        ],
+      },
+      list: {
+        description: "List repositories owned by user or organization",
+        usage: "gh repo list [<owner>] [flags]",
+        inputs: [
+          {
+            name: "owner",
+            type: "shell",
+            multiple: true,
+          },
+        ],
+        flags: [
+          {
+            names: ["--archived"],
+            description: "Show only archived repositories",
+          },
+          {
+            names: ["--fork"],
+            description: "Show only forks",
+          },
+          {
+            names: ["-q", "--jq"],
+            description: "Filter JSON output using a jq expression",
+            input: {
+              name: "expression",
+              type: "shell",
+            },
+          },
+          {
+            names: ["--json"],
+            description: "Output JSON with the specified fields",
+            input: {
+              name: "fields",
+              type: "shell",
+            },
+          },
+          {
+            names: ["-L", "--limit"],
+            description: "Maximum number of repositories to list",
+            input: {
+              name: "int",
+              type: "shell",
+            },
+          },
+          {
+            names: ["--no-archived"],
+            description: "Omit archived repositories",
+          },
+          {
+            names: ["-l", "--language"],
+            description: "Filter by primary coding language",
+            input: {
+              name: "string",
+              type: "shell",
+            },
+          },
+          {
+            names: ["--source"],
+            description: "Show only non-forks",
+          },
+          {
+            names: ["-t", "--template"],
+            description: `Format JSON output using a Go template. See "gh help formmating"`,
+            input: {
+              name: "string",
+              type: "string",
+            },
+          },
+          {
+            names: ["--visibility"],
+            description: "Filter by repository visibility: {public|private|internal}",
+            input: {
+              name: "string",
+              type: "string",
+              options: ["public", "private", "internal"],
+              required: true,
+            },
           },
         ],
       },

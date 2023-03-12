@@ -1,6 +1,7 @@
 import { window } from "vscode";
 import { currentCommand } from "./currentCommandStore";
-import { Subcommand, Input } from "./gh.types";
+import { Input, Subcommand } from "./gh.types";
+import { createQuickPickMenu } from "./quickpick";
 
 const pipe =
   <T>(...fns: [fn: (input: T) => T, doIt: boolean][]) =>
@@ -49,6 +50,33 @@ async function writeInput(input: Input) {
   return input.type === "string" ? wrapWithQuotes(inputString) : inputString;
 }
 
+async function selectOption(input: Input) {
+  if (!input.options) {
+    return;
+  }
+
+
+  let inputName = getInputName(input);
+
+  const helper = `${currentCommand.get()} ${inputName}`;
+
+  const items = input.options.map((option) => ({
+    label: option,
+  }));
+
+  const option = await createQuickPickMenu(items, {
+    title: `Select option for input ${helper}`,
+    canExecute: false,
+    skipType: undefined,
+  });
+
+  if (!option) {
+    throw new Error("No option selected");
+  }
+
+  return option.label;
+}
+
 export async function handleInputs(subcommand: Subcommand) {
   const inputs = subcommand.inputs;
 
@@ -57,7 +85,7 @@ export async function handleInputs(subcommand: Subcommand) {
   }
 
   for (const i of inputs) {
-    const inputString = await writeInput(i);
+    const inputString = i.options ? await selectOption(i) : await writeInput(i);
 
     if (i.required && !inputString) {
       throw new Error("Required input not provided");
