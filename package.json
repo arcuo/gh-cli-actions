@@ -43,10 +43,12 @@
         },
         "gh-cli-actions.ghShortcuts": {
           "type": "array",
-          "default": [{
-            "command": "gh pr list",
-            "name": "List pull requests"
-          }],
+          "default": [
+            {
+              "command": "gh pr list",
+              "name": "List pull requests"
+            }
+          ],
           "description": "List of gh command shortcuts"
         },
         "gh-cli-actions.lastCommand": {
@@ -65,7 +67,8 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts",
-    "precompile": "npx ts-json-as-const ./package.json"
+    "precompile": "npx ts-json-as-const ./package.json",
+    "fetch-gh-info": " npx ts-json-as-const ./src/gh-info.json"
   },
   "devDependencies": {
     "@types/glob": "^8.0.1",

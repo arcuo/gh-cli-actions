@@ -24,7 +24,6 @@ export async function selectSubcommand(command: GHCommand) {
   const subcommand = await createQuickPickMenu(items, {
     title: "Select sub command",
     canExecute: false,
-    skipType: undefined,
   });
 
   if (!subcommand) {

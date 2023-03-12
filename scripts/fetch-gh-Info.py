@@ -118,7 +118,8 @@ commandTotal, commandCount = len(commandNames), 0
 
 for command, commandLink in zip(commandNames, commandLinks):
     try:
-        print(f'({commandCount}/{commandTotal}) {command}')
+        commandCount += 1
+        print(f"({commandCount}/{commandTotal}) {command}")
 
         commandDict = {}
 
@@ -137,13 +138,18 @@ for command, commandLink in zip(commandNames, commandLinks):
             continue
 
         subcommandNames = [subcommand.text for subcommand in subcommands]
-        subcommandLinks = [subcommand.get_attribute("href") for subcommand in subcommands]
+        subcommandLinks = [
+            subcommand.get_attribute("href") for subcommand in subcommands
+        ]
 
         subCommandTotal, subCommandCount = len(subcommandNames), 0
 
         for subCommand, subcommandLink in zip(subcommandNames, subcommandLinks):
             try:
-                print(f'({commandCount}/{commandTotal}) ({subCommandCount}/{subCommandTotal}) {subCommand}')
+                subCommandCount += 1
+                print(
+                    f"({commandCount}/{commandTotal}) ({subCommandCount}/{subCommandTotal}) {subCommand}"
+                )
 
                 subcommandDict = {}
 
@@ -158,5 +164,5 @@ for command, commandLink in zip(commandNames, commandLinks):
         print("Error with command: " + command)
 
 
-with open("ghInfo.json", "w") as f:
+with open(".src/gh-info.json", "w") as f:
     f.write(json.dumps(fullDict))

@@ -50,7 +50,6 @@ async function selectShortcut() {
   const selected = await createQuickPickMenu(items, {
     title: "Select a shortcut",
     canExecute: false,
-    skipType: undefined,
   });
 
   if (!selected) {
