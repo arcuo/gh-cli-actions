@@ -2,7 +2,7 @@
   "name": "gh-cli-actions",
   "displayName": "gh-cli-actions",
   "description": "Access Github CLI from command palette",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.76.0"
   },
@@ -61,12 +61,21 @@
         },
         "gh-cli-actions.hideOptions": {
           "type": "array",
-          "default": ["api", "auth", "browse", "completion", "status"],
+          "default": [
+            "api",
+            "auth",
+            "browse",
+            "completion",
+            "status"
+          ],
           "description": "List of options to hide from the command input"
         },
         "gh-cli-actions.favorites": {
           "type": "array",
-          "default": ["pr", "repo"],
+          "default": [
+            "pr",
+            "repo"
+          ],
           "description": "List of commands that are used often and will therefore be shown first in the command input"
         }
       }
@@ -81,6 +90,7 @@
     "fetch-gh-info": "python3 ./scripts/fetch-gh-info.py"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
     "@types/glob": "^8.0.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
