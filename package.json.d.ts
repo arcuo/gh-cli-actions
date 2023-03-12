@@ -10,17 +10,14 @@ interface Package {
     commands: [
       {command: 'gh-cli-actions.gh-run', title: 'gh: Run a command'},
       {command: 'gh-cli-actions.gh-run-last', title: 'gh: Run last created command'},
-      {
-        command: 'gh-cli-actions.gh-create',
-        title: 'gh: Create a gh command shortcut for the workspace'
-      },
+      {command: 'gh-cli-actions.gh-create', title: 'gh: Create a gh command shortcut'},
       {
         command: 'gh-cli-actions.gh-run-shortcut',
         title: 'gh: Run a gh command shortcut'
       },
       {
         command: 'gh-cli-actions.gh-delete-shortcut',
-        title: 'gh: Run a gh command shortcut'
+        title: 'gh: Delete a gh command shortcut'
       }
     ],
     configuration: {
@@ -33,7 +30,17 @@ interface Package {
           description: 'List of gh command shortcuts'
         },
         'gh-cli-actions.lastCommand': {type: 'string', description: 'Last command run'},
-        'gh-cli-actions.runInTerminal': {type: 'boolean', description: 'Run the command in a terminal'}
+        'gh-cli-actions.runInTerminal': {type: 'boolean', description: 'Run the command in a terminal'},
+        'gh-cli-actions.hideOptions': {
+          type: 'array',
+          default: ['api', 'auth', 'browse', 'completion', 'status'],
+          description: 'List of options to hide from the command input'
+        },
+        'gh-cli-actions.favorites': {
+          type: 'array',
+          default: ['pr', 'repo'],
+          description: 'List of commands that are used often and will therefore be shown first in the command input'
+        }
       }
     }
   },
@@ -41,10 +48,9 @@ interface Package {
     'vscode:prepublish': 'pnpm run compile',
     compile: 'tsc -p ./',
     watch: 'tsc -watch -p ./',
-    pretest: 'pnpm run compile && pnpm run lint',
     lint: 'eslint src --ext ts',
-    test: 'node ./out/test/runTest.js',
-    precompile: 'npx ts-json-as-const ./package.json'
+    precompile: 'npx ts-json-as-const ./package.json',
+    'fetch-gh-info': 'python3 ./scripts/fetch-gh-info.py'
   },
   devDependencies: {
     '@types/glob': '^8.0.1',

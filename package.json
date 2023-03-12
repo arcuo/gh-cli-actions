@@ -58,6 +58,16 @@
         "gh-cli-actions.runInTerminal": {
           "type": "boolean",
           "description": "Run the command in a terminal"
+        },
+        "gh-cli-actions.hideOptions": {
+          "type": "array",
+          "default": ["api", "auth", "browse", "completion", "status"],
+          "description": "List of options to hide from the command input"
+        },
+        "gh-cli-actions.favorites": {
+          "type": "array",
+          "default": ["pr", "repo"],
+          "description": "List of commands that are used often and will therefore be shown first in the command input"
         }
       }
     }

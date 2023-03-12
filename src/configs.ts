@@ -23,7 +23,7 @@ interface TypesMap {
 
 type Primitive<T> = T extends string ? string : T extends number ? number : T extends boolean ? boolean : never;
 
-type ObjectPrimitives<T> = T extends object ? { [K in keyof T]: Primitive<T[K]> } : never;
+type ObjectPrimitives<T> = T extends object ? { [K in keyof T]: Primitive<T[K]> } : Primitive<T>;
 
 type Configs = {
   [TKey in keyof Properties as TKey extends `${string}.${infer TKey}`
