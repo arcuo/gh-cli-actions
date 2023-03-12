@@ -22,7 +22,7 @@ function wrapWithSquareBrackets(input: string) {
 
 export const getInputName = (input: Input) =>
   pipe(
-    [wrapWithQuotes, input.type === "string"],
+    // [wrapWithQuotes, input.type === "string"],
     [wrapWithBrackets, input.type === "shell"],
     [wrapWithSquareBrackets, !!input.multiple]
   )(input.name);

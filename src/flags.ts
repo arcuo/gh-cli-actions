@@ -14,7 +14,7 @@ async function writeFlagInput(flag: Flag) {
   }, "");
 
   let inputName = flag.input ? " " + getInputName(flag.input) : "";
-  const helper = `${currentCommand.get()} --${longName}${inputName}`;
+  const helper = `${currentCommand.get()} ${inputName}`;
 
   const flagInputString = await window.showInputBox({
     title: `Enter flag input ${helper}`,
@@ -50,6 +50,8 @@ export async function handleFlags(subcommand: Subcommand) {
       canExecute: true,
       picked: "execute",
     });
+
+    items = items.filter((item) => item !== flag);
 
     if (!flag || "isExecuteOption" in flag) {
       done = true;
