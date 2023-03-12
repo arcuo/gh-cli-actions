@@ -13,7 +13,7 @@
   "author": "Benjamin Zachariae",
   "publisher": "arcuo",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.76.0"
   },
@@ -90,16 +90,17 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run compile-base --minify",
+    "vscode:prepublish": "pnpm clean && pnpm run compile-base --minify",
     "compile-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
-    "compile": "pnpm run compile-base --sourcemap",
-    "watch": "pnpm run compile-base --sourcemap --watch",
+    "compile": "pnpm clean && pnpm run compile-base --sourcemap",
+    "watch": "pnpm clean && pnpm run compile-base --sourcemap --watch",
     "test-compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
     "precompile": "npx ts-json-as-const ./package.json",
     "fetch-gh-info": "python3 ./scripts/fetch-gh-info.py",
     "package": "pnpm vsce package --no-dependencies",
-    "publish": "pnpm vsce publish --no-dependencies"
+    "publish": "pnpm vsce publish --no-dependencies",
+    "clean": "rm -rf out"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",

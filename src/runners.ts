@@ -23,7 +23,6 @@ export async function createGHCommand() {
     logInfo(`Final command is: ${result}`);
     return result;
   } catch (e) {
-
     logAndInformError((e as Error).message);
     return;
   }
@@ -80,7 +79,16 @@ export async function runCommand(command: string) {
     } else {
       logAndInform(`Running: ${command}`);
 
-      exec(command, (error, stdout, stderr) => {
+      const rootPath = vscode.workspace.workspaceFolders?.[0].uri.path;
+
+      if (!rootPath) {
+        logAndInformError("No root path found");
+        return;
+      }
+
+      const commandToRun = `cd ${rootPath} && ${command}`;
+
+      exec(commandToRun, (error, stdout, stderr) => {
         if (error) {
           logAndInformError(`Error: ${error.message}`);
           return;
