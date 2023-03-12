@@ -2,7 +2,7 @@ interface Package {
   name: 'gh-cli-actions',
   displayName: 'gh-cli-actions',
   description: 'Access Github CLI from command palette',
-  version: '0.0.1',
+  version: '1.0.0',
   engines: {vscode: '^1.76.0'},
   categories: ['Other'],
   main: './out/extension.js',
@@ -23,14 +23,12 @@ interface Package {
     configuration: {
       title: 'Github CLI Actions',
       properties: {
-        'gh-cli-actions.ghPath': {type: 'string', default: 'gh', description: 'Path to the gh executable'},
         'gh-cli-actions.ghShortcuts': {
           type: 'array',
           default: [{command: 'gh pr list', name: 'List pull requests'}],
           description: 'List of gh command shortcuts'
         },
         'gh-cli-actions.lastCommand': {type: 'string', description: 'Last command run'},
-        'gh-cli-actions.runInTerminal': {type: 'boolean', description: 'Run the command in a terminal'},
         'gh-cli-actions.hideOptions': {
           type: 'array',
           default: ['api', 'auth', 'browse', 'completion', 'status'],
@@ -53,6 +51,7 @@ interface Package {
     'fetch-gh-info': 'python3 ./scripts/fetch-gh-info.py'
   },
   devDependencies: {
+    '@changesets/cli': '^2.26.0',
     '@types/glob': '^8.0.1',
     '@types/mocha': '^10.0.1',
     '@types/node': '16.x',
