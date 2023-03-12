@@ -68,7 +68,7 @@
     "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts",
     "precompile": "npx ts-json-as-const ./package.json",
-    "fetch-gh-info": " npx ts-json-as-const ./src/gh-info.json"
+    "fetch-gh-info": "python3 ./scripts/fetch-gh-info.py"
   },
   "devDependencies": {
     "@types/glob": "^8.0.1",

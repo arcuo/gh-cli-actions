@@ -1,4 +1,4 @@
-import GhInfo = require('./gh-info.json');
+import ghInfoJson from "./gh-info.json";
 
 export type Input = {
   name: string;
@@ -32,5 +32,4 @@ export type GHCommand = {
 
 type Commands = Record<string, GHCommand>;
 
-console.log('GhInfo:', GhInfo);
-export const GithubCLICommands = GhInfo as unknown as Commands;
+export const GithubCLICommands = ghInfoJson as unknown as Commands;
