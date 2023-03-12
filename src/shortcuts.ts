@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { Config } from "./configs";
+import { logAndInform } from "./logging";
 import { createQuickPickMenu } from "./quickpick";
 import { createGHCommand, runCommand } from "./runners";
 
@@ -34,9 +35,7 @@ export async function createNewShortcut() {
 
   Config.set("ghShortcuts", shortcuts);
 
-  vscode.window.showInformationMessage(
-    `Shortcut created - ${name} : ${shortcutCommand}`
-  );
+  logAndInform(`Shortcut created - ${name} : ${shortcutCommand}`);
 }
 
 async function selectShortcut() {
@@ -75,7 +74,5 @@ export async function removeShortCut() {
 
   Config.set("ghShortcuts", filteredShortcuts);
 
-  vscode.window.showInformationMessage(
-    `Shortcut removed - ${shortcut.name} : ${shortcut.command}`
-  );
+  logAndInform(`Shortcut removed - ${shortcut.name} : ${shortcut.command}`);
 }

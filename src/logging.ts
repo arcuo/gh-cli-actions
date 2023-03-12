@@ -56,3 +56,15 @@ export function logError(message: any, ...args: any[]) {
 export function logWarning(message: any, ...args: any[]) {
   log(mapStrings(message, args), LogType.Warning);
 }
+
+
+
+export function logAndInform(message: string) {
+  logInfo(message);
+  window.showInformationMessage(message);
+}
+
+export function logAndInformError(error: string) {
+  logError(error);
+  window.showErrorMessage(error);
+}

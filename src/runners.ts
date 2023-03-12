@@ -2,15 +2,15 @@
  * This file contains the logic for running the commands
  */
 
+import { exec } from "child_process";
+import * as vscode from "vscode";
 import { selectCommand } from "./commands";
+import { Config } from "./configs";
 import { currentCommand } from "./currentCommandStore";
 import { handleFlags } from "./flags";
 import { handleInputs } from "./inputs";
-import { logInfo } from "./logging";
+import { logAndInform, logAndInformError, logInfo } from "./logging";
 import { selectSubcommand } from "./subcommand";
-import * as vscode from "vscode";
-import { Config } from "./configs";
-import { createQuickPickMenu } from "./quickpick";
 
 export async function createGHCommand() {
   try {
@@ -23,7 +23,8 @@ export async function createGHCommand() {
     logInfo(`Final command is: ${result}`);
     return result;
   } catch (e) {
-    console.error(e);
+
+    logAndInformError((e as Error).message);
     return;
   }
 }
@@ -43,6 +44,13 @@ export async function runCommand(command: string) {
         run: true,
       },
       {
+        label: "Run command in terminal",
+        description: command,
+        alwaysShow: true,
+        run: true,
+        terminal: true,
+      },
+      {
         label: "Copy command",
         description: command,
         alwaysShow: true,
@@ -59,22 +67,33 @@ export async function runCommand(command: string) {
     }
   );
 
-  if (!confirm || "cancel" in confirm) {
-    vscode.window.showInformationMessage("Command cancelled");
+  if (!confirm || confirm.cancel) {
+    logAndInform("Command cancelled");
     return;
   }
 
-  if ("run" in confirm) {
-    const terminal = vscode.window.createTerminal("gh-cli-actions");
-    terminal.show();
-    terminal.sendText(command);
+  if (confirm.run) {
+    if (confirm.terminal) {
+      const terminal = vscode.window.createTerminal("gh-cli-actions");
+      terminal.show();
+      terminal.sendText(command);
+    } else {
+      logAndInform(`Running: ${command}`);
+
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          logAndInformError(`Error: ${error.message}`);
+          return;
+        }
+
+        logAndInform(`Command ran with output: ${stdout}`);
+      });
+    }
   }
 
-  if ("copy" in confirm) {
+  if (confirm.copy) {
     vscode.env.clipboard.writeText(command);
-    vscode.window.showInformationMessage(
-      `Command copied to clipboard "${command}"`
-    );
+    logAndInform(`Command copied to clipboard "${command}"`);
   }
 }
 
@@ -84,6 +103,6 @@ export async function runLastCommand() {
   if (lastCommand) {
     runCommand(lastCommand);
   } else {
-    vscode.window.showInformationMessage("No last command found");
+    logAndInform("No last command found");
   }
 }
