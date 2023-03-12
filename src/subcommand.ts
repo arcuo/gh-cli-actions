@@ -15,11 +15,13 @@ export async function selectSubcommand(command: GHCommand) {
     return subcommand;
   }
 
-  const items = Object.entries(subcommands).map(([name, subcommand]) => ({
-    label: subcommand.usage,
-    name,
-    ...subcommand,
-  }));
+  const items = Object.entries(subcommands)
+    .filter(([_, object]) => object.usage)
+    .map(([name, subcommand]) => ({
+      label: subcommand.usage,
+      name,
+      ...subcommand,
+    }));
 
   const subcommand = await createQuickPickMenu(items, {
     title: "Select sub command",

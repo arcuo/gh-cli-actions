@@ -11,8 +11,9 @@ def getPage(url):
 
 
 def getInputsfromString(string):
-    individual_inputs = re.findall(r" <(.*)>", string)
-    multiple_inputs = re.findall(r"\[<(.*)>\]", string)
+
+    multiple_inputs = re.findall(r"(?:\[|\{)(<.*>(?: \|)?)+(?:\]|\})+", string)
+    individual_inputs = re.findall(r"(?!\[|\{)(<.*>(?! \|))+(?!\]|\})", string)
 
     inputs = []
     for input in individual_inputs:
@@ -36,7 +37,7 @@ def getInputsfromString(string):
 
 
 def getSubcommandInfo(subcommandDict, page):
-    usage = page.select_one("pre.highlight").string
+    usage = page.select_one("pre.highlight").get_text(strip = True)
 
     subcommandDict["usage"] = usage
 
@@ -130,12 +131,12 @@ def getCommandInfo(command, commandLink):
                 )
 
                 getSubcommandInfo(subcommandDict, subcommandPage)
-            except:
-                print("Error with subcommand: " + subCommand)
+            except Exception as e:
+                print("Error with subcommand: " + subCommand + " - " + str(e))
 
         return stripGH(command), commandDict
-    except:
-        print("Error with command: " + command)
+    except Exception as e:
+        print("Error with command: " + command + " " + str(e))
 
 
 # Main
@@ -146,7 +147,7 @@ manualPage = getPage("https://cli.github.com/manual/gh")
 
 commands = manualPage.select("[href^='./gh']")
 
-# commands = commands[0:1]
+# commands = commands[5:6]
 
 commandNames = [command.string for command in commands]
 commandLinks = [command["href"] for command in commands]
@@ -155,7 +156,7 @@ args = zip(commandNames, commandLinks)
 
 import concurrent.futures
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
     pool = [
         executor.submit(getCommandInfo, commandName, commandLink)
         for commandName, commandLink in args
