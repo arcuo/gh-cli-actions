@@ -38,3 +38,4 @@ This extension contributes the following settings:
 * Allow going back in a command (i.e. moving one step back in the command)
 * Allow adding inputs and/or flags to shortcuts. Allowing you to create shortcuts that you can still add input or flags to.
 * Grab specific options from manual scraping to allow inputs to have options.
+* Feel free to add issues with ideas.
