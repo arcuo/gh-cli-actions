@@ -5,7 +5,7 @@ interface Package {
   version: '1.0.0',
   engines: {vscode: '^1.76.0'},
   categories: ['Other'],
-  main: './out/extension.js',
+  main: './out/main.js',
   contributes: {
     commands: [
       {command: 'gh-cli-actions.gh-run', title: 'gh: Run a command'},
@@ -43,9 +43,11 @@ interface Package {
     }
   },
   scripts: {
-    'vscode:prepublish': 'pnpm run compile',
-    compile: 'tsc -p ./',
-    watch: 'tsc -watch -p ./',
+    'vscode:prepublish': 'pnpm run compile-base --minify',
+    'compile-base': 'esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node',
+    compile: 'pnpm run compile-base --sourcemap',
+    watch: 'pnpm run compile-base --sourcemap --watch',
+    'test-compile': 'tsc -p ./',
     lint: 'eslint src --ext ts',
     precompile: 'npx ts-json-as-const ./package.json',
     'fetch-gh-info': 'python3 ./scripts/fetch-gh-info.py'
@@ -59,6 +61,7 @@ interface Package {
     '@typescript-eslint/eslint-plugin': '^5.49.0',
     '@typescript-eslint/parser': '^5.49.0',
     '@vscode/test-electron': '^2.2.2',
+    esbuild: '^0.17.11',
     eslint: '^8.33.0',
     glob: '^8.1.0',
     mocha: '^10.1.0',
