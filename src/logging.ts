@@ -14,7 +14,7 @@ export const LogType = {
   Warning: "Warning",
 } as const;
 
-type LogType = typeof LogType[keyof typeof LogType];
+type LogType = (typeof LogType)[keyof typeof LogType];
 
 export function log(message: string, type: LogType = LogType.Info) {
   if (!outputChannel) {
@@ -56,8 +56,6 @@ export function logError(message: any, ...args: any[]) {
 export function logWarning(message: any, ...args: any[]) {
   log(mapStrings(message, args), LogType.Warning);
 }
-
-
 
 export function logAndInform(message: string) {
   logInfo(message);

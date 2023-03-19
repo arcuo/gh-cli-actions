@@ -8,7 +8,7 @@ import { selectCommand } from "./commands";
 import { Config } from "./configs";
 import { currentCommand } from "./currentCommandStore";
 import { handleFlags } from "./flags";
-import { logAndInform, logAndInformError, logInfo } from "./logging";
+import { logAndInform, logAndInformError, logError, logInfo } from "./logging";
 import { selectSubcommand } from "./subcommand";
 
 export async function createGHCommand() {
@@ -31,9 +31,7 @@ export async function runCreateCommand(): Promise<string> {
   }
 
   if (!currentCommand.commandStruct.subcommand) {
-    await selectSubcommand(
-      currentCommand.commandStruct!.command
-    );
+    await selectSubcommand(currentCommand.commandStruct!.command);
 
     return runCreateCommand();
   }
@@ -98,15 +96,17 @@ export async function runCommand(command: string) {
       terminal.show();
       terminal.sendText(command);
     } else {
-      logAndInform(`Running: ${command}`);
-
-      const { out, error } = await cmd(...command.split(" "));
-      if (error) {
-        logAndInformError(`Error: ${out}`);
-        return;
-      }
-
-      logAndInform(`Command ran with output: \n${out}`);
+      vscode.window
+        .withProgress(
+          {
+            title: `Running: ${command}`,
+            location: vscode.ProgressLocation.Notification,
+          },
+          () => cmd(...command.split(" "))
+        )
+        .then(({ out, error }) => {
+          showResultMessage(out, error);
+        });
     }
   }
 
@@ -114,6 +114,25 @@ export async function runCommand(command: string) {
     vscode.env.clipboard.writeText(command);
     logAndInform(`Command copied to clipboard "${command}"`);
   }
+}
+
+function showResultMessage(out: string, error: boolean) {
+  (error ? logError : logInfo)(out);
+
+  const outList = out.split("\n").filter((s) => s);
+  const actions =
+    outList.length > 1 ? ["Full message", "Dismiss"] : ["Dismiss"];
+
+  (error
+    ? vscode.window.showErrorMessage
+    : vscode.window.showInformationMessage)(
+    `${outList[0]}${outList.length > 1 ? "..." : ""}`,
+    ...actions
+  ).then((value) => {
+    if (value !== "Dismiss") {
+      vscode.window.showErrorMessage(out, { modal: true });
+    }
+  });
 }
 
 export async function runLastCommand() {
