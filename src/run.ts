@@ -129,9 +129,10 @@ function showResultMessage(out: string, error: boolean) {
     `${outList[0]}${outList.length > 1 ? "..." : ""}`,
     ...actions
   ).then((value) => {
-    if (value !== "Dismiss") {
-      vscode.window.showErrorMessage(out, { modal: true });
+    if (value === "Dismiss" || undefined) {
+      return;
     }
+    vscode.window.showErrorMessage(out, { modal: true });
   });
 }
 
