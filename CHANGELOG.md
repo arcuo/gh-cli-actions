@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.1.0
+
+### Minor Changes
+
+- Shortcut updates and small fixes
+
 ## 1.0.3
 
 ### Patch Changes
