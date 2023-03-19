@@ -73,9 +73,10 @@ export async function handleFlags(subcommand: Subcommand) {
       }
     }
 
-    if (!flag.input?.multiple) {
-      items = items.filter((item) => item !== flag);
-    }
+    // TODO: Cannot read from GH manual if flags are "multiple". Remove before this can be figured out to allow adding multiple if needed
+    // if (!flag.input?.multiple) {
+    //   items = items.filter((item) => item !== flag);
+    // }
 
     currentCommand.addFlag(flag, flagValue);
   }
