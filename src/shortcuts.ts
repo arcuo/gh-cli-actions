@@ -48,6 +48,7 @@ export async function createNewShortcut() {
     {
       title: "Select a shortcut creation method",
       canExecute: false,
+      canGoBack: false,
     }
   );
 
@@ -103,6 +104,7 @@ async function selectShortcut() {
   const selected = await createQuickPickMenu(items, {
     title: "Select a shortcut",
     canExecute: false,
+    canGoBack: false,
   });
 
   if (!selected) {

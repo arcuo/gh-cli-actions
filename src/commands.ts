@@ -34,6 +34,7 @@ export async function selectCommand() {
   const command = await createQuickPickMenu(items, {
     title: "Select Command",
     canExecute: false,
+    canGoBack: false,
   });
 
   if (!command) {

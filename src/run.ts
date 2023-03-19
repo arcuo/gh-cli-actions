@@ -8,24 +8,45 @@ import { selectCommand } from "./commands";
 import { Config } from "./configs";
 import { currentCommand } from "./currentCommandStore";
 import { handleFlags } from "./flags";
-import { handleInputs } from "./inputs";
 import { logAndInform, logAndInformError, logInfo } from "./logging";
 import { selectSubcommand } from "./subcommand";
 
 export async function createGHCommand() {
   try {
-    const command = await selectCommand();
-    const subcommand = await selectSubcommand(command);
-    await handleInputs(subcommand);
-    await handleFlags(subcommand);
+    currentCommand.reset();
+    const result = await runCreateCommand();
 
-    const result = currentCommand.get();
     logInfo(`Final command is: ${result}`);
     return result;
   } catch (e) {
     logAndInformError((e as Error).message);
     return;
   }
+}
+
+export async function runCreateCommand(): Promise<string> {
+  if (!currentCommand.commandStruct?.command) {
+    await selectCommand();
+    return runCreateCommand();
+  }
+
+  if (!currentCommand.commandStruct.subcommand) {
+    await selectSubcommand(
+      currentCommand.commandStruct!.command
+    );
+
+    return runCreateCommand();
+  }
+
+  const { isDone } = await handleFlags(
+    currentCommand.commandStruct!.subcommand!
+  );
+
+  if (!isDone) {
+    return runCreateCommand();
+  }
+
+  return currentCommand.get();
 }
 
 export async function runCommand(command: string) {
