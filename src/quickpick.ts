@@ -20,7 +20,7 @@ function executeQuickPickOption(picked?: boolean) {
 
 export async function createQuickPickMenu<
   TItem extends QuickPickItem,
-  TCanExecute extends boolean,
+  TCanExecute extends boolean
 >(
   items: TItem[],
   options: {

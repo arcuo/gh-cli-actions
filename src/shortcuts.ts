@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { Config } from "./configs";
 import { logAndInform, logAndInformError } from "./logging";
 import { createQuickPickMenu } from "./quickpick";
-import { createGHCommand, runCommand } from "./runners";
+import { createGHCommand, runCommand } from "./run";
 
 function getShortcuts() {
   const shortcuts = Config.get("ghShortcuts") ?? [];

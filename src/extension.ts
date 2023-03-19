@@ -3,7 +3,7 @@
 import * as vscode from "vscode";
 import { currentCommand } from "./currentCommandStore";
 import { initOutputChannel, logInfo } from "./logging";
-import { createGHCommand, runCommand, runLastCommand } from "./runners";
+import { createGHCommand, runCommand, runLastCommand } from "./run";
 import { createNewShortcut, removeShortCut, runShortcut } from "./shortcuts";
 
 import Package = require("../package.json");

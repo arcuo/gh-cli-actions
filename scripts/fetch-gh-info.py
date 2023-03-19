@@ -11,7 +11,6 @@ def getPage(url):
 
 
 def getInputsfromString(string):
-
     multiple_inputs = re.findall(r"(?:\[|\{)(<.*>(?: \|)?)+(?:\]|\})+", string)
     individual_inputs = re.findall(r"(?!\[|\{)(<.*>(?! \|))+(?!\]|\})", string)
 
@@ -19,7 +18,7 @@ def getInputsfromString(string):
     for input in individual_inputs:
         input = {
             "name": input,
-            "type": "string",
+            "type": "string" if "string" in input else "shell",
         }
 
         inputs.append(input)
@@ -27,7 +26,7 @@ def getInputsfromString(string):
     for input in multiple_inputs:
         input = {
             "name": input,
-            "type": "string",
+            "type": "string" if "string" in input else "shell",
             "multiple": True,
         }
 
@@ -37,7 +36,7 @@ def getInputsfromString(string):
 
 
 def getSubcommandInfo(subcommandDict, page):
-    usage = page.select_one("pre.highlight").get_text(strip = True)
+    usage = page.select_one("pre.highlight").get_text(strip=True)
 
     subcommandDict["usage"] = usage
 
@@ -98,7 +97,6 @@ def getCommandInfo(command, commandLink):
         except:
             getSubcommandInfo(commandDict, commandPage)
             return
-        
 
         description = " ".join(
             [

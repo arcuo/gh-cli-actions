@@ -1,4 +1,4 @@
-import { currentCommand } from './currentCommandStore';
+import { currentCommand } from "./currentCommandStore";
 import { GHCommand } from "./gh.types";
 import { createQuickPickMenu } from "./quickpick";
 
@@ -11,7 +11,7 @@ export async function selectSubcommand(command: GHCommand) {
 
   if (Object.values(subcommands).length === 1) {
     const [name, subcommand] = Object.entries(subcommands)[0];
-    currentCommand.add(name);
+    currentCommand.addSubcommand(name, subcommand);
     return subcommand;
   }
 
@@ -32,7 +32,7 @@ export async function selectSubcommand(command: GHCommand) {
     throw new Error("No sub command selected");
   }
 
-  currentCommand.add(subcommand.name);
+  currentCommand.addSubcommand(subcommand.name, subcommand);
 
   return subcommand;
 }

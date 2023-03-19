@@ -1,6 +1,7 @@
 import { window } from "vscode";
 import { currentCommand } from "./currentCommandStore";
 import { Input, Subcommand } from "./gh.types";
+import { logAndInformError } from "./logging";
 import { createQuickPickMenu } from "./quickpick";
 
 const pipe =
@@ -55,7 +56,6 @@ async function selectOption(input: Input) {
     return;
   }
 
-
   let inputName = getInputName(input);
 
   const helper = `${currentCommand.get()} ${inputName}`;
@@ -87,11 +87,12 @@ export async function handleInputs(subcommand: Subcommand) {
     const inputString = i.options ? await selectOption(i) : await writeInput(i);
 
     if (i.required && !inputString) {
+      logAndInformError("Required input not provided");
       throw new Error("Required input not provided");
     }
 
     if (inputString) {
-      currentCommand.add(inputString);
+      currentCommand.addInput(inputString, i);
     }
   }
 }

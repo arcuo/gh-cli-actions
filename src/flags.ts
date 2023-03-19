@@ -1,7 +1,7 @@
 import { window } from "vscode";
 import { currentCommand } from "./currentCommandStore";
 import { Flag, Subcommand } from "./gh.types";
-import { getInputName, wrapWithQuotes } from "./inputs";
+import { getInputName } from "./inputs";
 import { createQuickPickMenu } from "./quickpick";
 
 async function writeFlagInput(flag: Flag) {
@@ -25,9 +25,7 @@ async function writeFlagInput(flag: Flag) {
     return;
   }
 
-  return flag.input?.type === "string"
-    ? wrapWithQuotes(flagInputString)
-    : flagInputString;
+  return flagInputString;
 }
 
 export async function handleFlags(subcommand: Subcommand) {
@@ -51,22 +49,24 @@ export async function handleFlags(subcommand: Subcommand) {
       picked: "execute",
     });
 
-    items = items.filter((item) => item !== flag);
+    if (flag && "input" in flag && !flag.input?.multiple) {
+      items = items.filter((item) => item !== flag);
+    }
 
     if (!flag || "isExecuteOption" in flag) {
       done = true;
       continue;
     }
 
-    currentCommand.add(flag.names[0]);
+    let flagValue: string | undefined = undefined;
 
     if (flag.input) {
-      const flagString = await writeFlagInput(flag);
-      if (flagString) {
-        currentCommand.add(flagString);
-      } else if (flag.input.required) {
+      flagValue = await writeFlagInput(flag);
+      if (!flagValue && flag.input.required) {
         throw new Error("Required flag input not provided");
       }
     }
+
+    currentCommand.addFlag(flag, flagValue);
   }
 }

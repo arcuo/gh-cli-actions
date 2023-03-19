@@ -2,7 +2,7 @@
  * This file contains the logic for running the commands
  */
 
-import { exec } from "child_process";
+import { spawn } from "child_process";
 import * as vscode from "vscode";
 import { selectCommand } from "./commands";
 import { Config } from "./configs";
@@ -79,23 +79,13 @@ export async function runCommand(command: string) {
     } else {
       logAndInform(`Running: ${command}`);
 
-      const rootPath = vscode.workspace.workspaceFolders?.[0].uri.path;
-
-      if (!rootPath) {
-        logAndInformError("No root path found");
+      const { out, error } = await cmd(...command.split(" "));
+      if (error) {
+        logAndInformError(`Error: ${out}`);
         return;
       }
 
-      const commandToRun = `cd ${rootPath} && ${command}`;
-
-      exec(commandToRun, (error, stdout, stderr) => {
-        if (error) {
-          logAndInformError(`Error: ${error.message}`);
-          return;
-        }
-
-        logAndInform(`Command ran with output: ${stdout}`);
-      });
+      logAndInform(`Command ran with output: \n${out}`);
     }
   }
 
@@ -111,6 +101,33 @@ export async function runLastCommand() {
   if (lastCommand) {
     runCommand(lastCommand);
   } else {
-    logAndInform("No last command found");
+    logAndInform(
+      "No last command found create a new on or run a shortcut from the command palette with the prefix 'gh'"
+    );
   }
+}
+
+function cmd(...command: string[]) {
+  const rootPath = vscode.workspace.workspaceFolders?.[0].uri.path;
+  let p = spawn(command[0], command.slice(1), {
+    stdio: "pipe",
+    cwd: rootPath,
+    env: {
+      ...process.env,
+      GH_FORCE_TTY: "true",
+    },
+  });
+
+  return new Promise<{ out: string; error: boolean }>((resolve) => {
+    let out = "";
+    p.stdout.on("data", (x) => {
+      out += x.toString();
+    });
+    p.stderr.on("data", (x) => {
+      out += x.toString();
+    });
+    p.on("exit", (code) => {
+      resolve({ out: decodeURIComponent(out), error: code !== 0 });
+    });
+  });
 }
