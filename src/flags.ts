@@ -1,8 +1,12 @@
 import { window } from "vscode";
 import { currentCommand } from "./currentCommandStore";
 import { Flag, Subcommand } from "./gh.types";
-import { getInputName, wrapWithQuotes } from "./inputs";
-import { createQuickPickMenu } from "./quickpick";
+import { getInputName } from "./inputs";
+import {
+  createQuickPickMenu,
+  isExecuteOption,
+  isGoBackOption,
+} from "./quickpick";
 
 async function writeFlagInput(flag: Flag) {
   if (!flag.names) {
@@ -25,16 +29,14 @@ async function writeFlagInput(flag: Flag) {
     return;
   }
 
-  return flag.input?.type === "string"
-    ? wrapWithQuotes(flagInputString)
-    : flagInputString;
+  return flagInputString;
 }
 
 export async function handleFlags(subcommand: Subcommand) {
   const flags = subcommand.flags;
 
   if (!flags) {
-    return;
+    return { isDone: true };
   }
 
   let done = false;
@@ -48,25 +50,36 @@ export async function handleFlags(subcommand: Subcommand) {
     const flag = await createQuickPickMenu(items, {
       title: "Select Flag",
       canExecute: true,
+      canGoBack: true,
       picked: "execute",
     });
 
-    items = items.filter((item) => item !== flag);
-
-    if (!flag || "isExecuteOption" in flag) {
-      done = true;
-      continue;
+    if (!flag || isExecuteOption(flag)) {
+      return { isDone: true };
     }
 
-    currentCommand.add(flag.names[0]);
+    if (isGoBackOption(flag)) {
+      currentCommand.goBack();
+      return { isDone: false };
+    }
+
+    let flagValue: string | undefined = undefined;
 
     if (flag.input) {
-      const flagString = await writeFlagInput(flag);
-      if (flagString) {
-        currentCommand.add(flagString);
-      } else if (flag.input.required) {
+      flagValue = await writeFlagInput(flag);
+
+      if (!flagValue && flag.input.required) {
         throw new Error("Required flag input not provided");
       }
     }
+
+    // TODO: Cannot read from GH manual if flags are "multiple". Remove before this can be figured out to allow adding multiple if needed
+    // if (!flag.input?.multiple) {
+    //   items = items.filter((item) => item !== flag);
+    // }
+
+    currentCommand.addFlag(flag, flagValue);
   }
+
+  return { isDone: true };
 }

@@ -1,6 +1,7 @@
-import { currentCommand } from './currentCommandStore';
+import { currentCommand } from "./currentCommandStore";
 import { GHCommand } from "./gh.types";
-import { createQuickPickMenu } from "./quickpick";
+import { selectSubcommandInput } from "./inputs";
+import { createQuickPickMenu, isGoBackOption } from "./quickpick";
 
 export async function selectSubcommand(command: GHCommand) {
   const subcommands = command.subcommands;
@@ -11,7 +12,7 @@ export async function selectSubcommand(command: GHCommand) {
 
   if (Object.values(subcommands).length === 1) {
     const [name, subcommand] = Object.entries(subcommands)[0];
-    currentCommand.add(name);
+    currentCommand.addSubcommand(name, subcommand);
     return subcommand;
   }
 
@@ -26,13 +27,22 @@ export async function selectSubcommand(command: GHCommand) {
   const subcommand = await createQuickPickMenu(items, {
     title: "Select sub command",
     canExecute: false,
+    canGoBack: true,
   });
 
   if (!subcommand) {
     throw new Error("No sub command selected");
   }
 
-  currentCommand.add(subcommand.name);
+  if (isGoBackOption(subcommand)) {
+    currentCommand.goBack();
+    return;
+  }
 
-  return subcommand;
+  let inputValue: string | undefined = undefined;
+  if (subcommand.inputs) {
+    inputValue = await selectSubcommandInput(subcommand.inputs);
+  }
+
+  currentCommand.addSubcommand(subcommand.name, subcommand, inputValue);
 }

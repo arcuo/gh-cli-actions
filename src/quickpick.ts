@@ -18,34 +18,64 @@ function executeQuickPickOption(picked?: boolean) {
   } as const;
 }
 
+type ExecuteOption<T extends boolean = true> = T extends true
+  ? ReturnType<typeof executeQuickPickOption>
+  : never;
+
+export function isExecuteOption(option: any): option is ExecuteOption {
+  return "isExecuteOption" in option;
+}
+
+function goBackQuickPickOption() {
+  return {
+    label: `Go one step back`,
+    alwaysShow: true,
+    isGoBackOption: true,
+  } as const;
+}
+
+type GoBackOption<T extends boolean = true> = T extends true
+  ? ReturnType<typeof goBackQuickPickOption>
+  : never;
+
+export function isGoBackOption(option: any): option is GoBackOption {
+  return "isGoBackOption" in option;
+}
+
 export async function createQuickPickMenu<
   TItem extends QuickPickItem,
-  TCanExecute extends boolean,
->(
-  items: TItem[],
-  options: {
+  TOptions extends {
     title: string;
-    canExecute: TCanExecute;
+    canExecute: boolean;
+    canGoBack: boolean;
     picked?: "execute" | "skip";
   }
-) {
-  const { canExecute, picked, title } = options;
+>(items: TItem[], options: TOptions) {
+  const { canExecute, canGoBack, picked, title } = options;
 
-  type ExecuteOption = TCanExecute extends false
-    ? never
-    : ReturnType<typeof executeQuickPickOption>;
-
-  type OptionItems = (TItem | ExecuteOption)[];
+  type OptionItems = (
+    | TItem
+    | ExecuteOption<TOptions["canExecute"]>
+    | GoBackOption<TOptions["canGoBack"]>
+  )[];
 
   const quickPickItems: OptionItems = [];
 
   if (canExecute) {
     quickPickItems.push(
-      executeQuickPickOption(picked === "execute") as ExecuteOption
+      executeQuickPickOption(picked === "execute") as ExecuteOption<
+        TOptions["canExecute"]
+      >
     );
   }
 
   quickPickItems.push(...items);
+
+  if (canGoBack) {
+    quickPickItems.push(
+      goBackQuickPickOption() as GoBackOption<TOptions["canGoBack"]>
+    );
+  }
 
   return window.showQuickPick(quickPickItems, {
     ...quickPickOptionDefaults,

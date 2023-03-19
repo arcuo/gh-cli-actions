@@ -1,6 +1,7 @@
 import { window } from "vscode";
 import { currentCommand } from "./currentCommandStore";
-import { Input, Subcommand } from "./gh.types";
+import { Input } from "./gh.types";
+import { logAndInformError } from "./logging";
 import { createQuickPickMenu } from "./quickpick";
 
 const pipe =
@@ -23,7 +24,7 @@ function wrapWithSquareBrackets(input: string) {
 export const getInputName = (input: Input) =>
   pipe(
     // [wrapWithQuotes, input.type === "string"],
-    [wrapWithBrackets, input.type === "shell"],
+    // [wrapWithBrackets, input.type === "shell"],
     [wrapWithSquareBrackets, !!input.multiple]
   )(input.name);
 
@@ -34,13 +35,13 @@ async function writeInput(input: Input) {
 
   let inputName = getInputName(input);
 
-  const helper = `${currentCommand.get()} ${inputName}`;
+  const commandString = `${currentCommand.get()} ${inputName}`;
 
   const inputString = await window.showInputBox({
-    title: `Enter input ${helper} ${
+    title: `Enter input "${commandString}" ${
       input.required ? "(required: true)" : "(Keep blank to skip input)"
     }`,
-    placeHolder: input.name,
+    placeHolder: inputName,
   });
 
   if (!inputString) {
@@ -55,7 +56,6 @@ async function selectOption(input: Input) {
     return;
   }
 
-
   let inputName = getInputName(input);
 
   const helper = `${currentCommand.get()} ${inputName}`;
@@ -67,6 +67,7 @@ async function selectOption(input: Input) {
   const option = await createQuickPickMenu(items, {
     title: `Select option for input ${helper}`,
     canExecute: false,
+    canGoBack: false,
   });
 
   if (!option) {
@@ -76,22 +77,17 @@ async function selectOption(input: Input) {
   return option.label;
 }
 
-export async function handleInputs(subcommand: Subcommand) {
-  const inputs = subcommand.inputs;
-
-  if (!inputs) {
-    return;
-  }
-
+export async function selectSubcommandInput(inputs: Input[]) {
+  let inputsString = "";
   for (const i of inputs) {
     const inputString = i.options ? await selectOption(i) : await writeInput(i);
 
     if (i.required && !inputString) {
+      logAndInformError("Required input not provided");
       throw new Error("Required input not provided");
     }
 
-    if (inputString) {
-      currentCommand.add(inputString);
-    }
+    inputsString += " " + inputString;
   }
+  return inputsString ? inputsString : undefined;
 }

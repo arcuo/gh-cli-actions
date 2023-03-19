@@ -155,7 +155,7 @@
       "cp": {
         "usage": "gh codespace cp [-e] [-r] [-- [<scp flags>...]] <sources>... <dest>",
         "inputs": [
-          { "name": "<scp flags>...]] <sources>... <dest>", "type": "string" }
+          { "name": "<scp flags>...]] <sources>... <dest>", "type": "shell" }
         ],
         "description": "The cp command copies files between the local and remote file systems.",
         "flags": [
@@ -214,7 +214,7 @@
           {
             "names": ["--idle-timeout"],
             "description": "allowed inactivity before codespace is stopped, e.g. \"10m\", \"1h\"",
-            "input": { "name": "<duration>", "type": "string" }
+            "input": { "name": "<duration>", "type": "shell" }
           },
           {
             "names": ["-l", "--location"],
@@ -234,7 +234,7 @@
           {
             "names": ["--retention-period"],
             "description": "allowed time after shutting down before the codespace is automatically deleted (maximum 30 days), e.g. \"1h\", \"72h\"",
-            "input": { "name": "<duration>", "type": "string" }
+            "input": { "name": "<duration>", "type": "shell" }
           },
           {
             "names": ["-s", "--status"],
@@ -261,7 +261,7 @@
           {
             "names": ["--days"],
             "description": "Delete codespaces older than N days",
-            "input": { "name": "<N>", "type": "string" }
+            "input": { "name": "<N>", "type": "shell" }
           },
           {
             "names": ["-f", "--force"],
@@ -271,7 +271,7 @@
           {
             "names": ["-o", "--org"],
             "description": "The login handle of the organization (admin-only)",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["-R", "--repo"],
@@ -281,7 +281,7 @@
           {
             "names": ["-u", "--user"],
             "description": "The username to delete codespaces for (used with --org)",
-            "input": { "name": "<username>", "type": "string" }
+            "input": { "name": "<username>", "type": "shell" }
           }
         ]
       },
@@ -337,22 +337,22 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of codespaces to list",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["-o", "--org"],
             "description": "The login handle of the organization to list codespaces for (admin-only)",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["-R", "--repo"],
@@ -367,7 +367,7 @@
           {
             "names": ["-u", "--user"],
             "description": "The username to list codespaces for (used with --org)",
-            "input": { "name": "<username>", "type": "string" }
+            "input": { "name": "<username>", "type": "shell" }
           }
         ]
       },
@@ -406,12 +406,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-R", "--repo"],
@@ -450,10 +450,10 @@
       "ssh": {
         "usage": "gh codespace ssh [<flags>...] [-- <ssh-flags>...] [<command>]",
         "inputs": [
-          { "name": "<flags>...] [-- <ssh-flags>", "type": "string" },
+          { "name": "<flags>...] [-- <ssh-flags>", "type": "shell" },
           {
             "name": "<flags>...] [-- <ssh-flags>...] [<command>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -492,7 +492,7 @@
           {
             "names": ["--server-port"],
             "description": "SSH server port number (0 => pick unused)",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           }
         ]
       },
@@ -509,7 +509,7 @@
           {
             "names": ["-o", "--org"],
             "description": "The login handle of the organization (admin-only)",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["-R", "--repo"],
@@ -519,7 +519,7 @@
           {
             "names": ["-u", "--user"],
             "description": "The username to stop codespace for (used with --org)",
-            "input": { "name": "<username>", "type": "string" }
+            "input": { "name": "<username>", "type": "shell" }
           }
         ]
       }
@@ -531,15 +531,15 @@
       "clone": {
         "usage": "gh gist clone <gist> [<directory>] [-- <gitflags>...]",
         "inputs": [
-          { "name": "<gist> [<directory>] [-- <gitflags>", "type": "string" },
-          { "name": "<directory>", "type": "string", "multiple": true }
+          { "name": "<gist> [<directory>] [-- <gitflags>", "type": "shell" },
+          { "name": "<directory>", "type": "shell", "multiple": true }
         ],
         "description": "Clone a GitHub gist locally.",
         "flags": []
       },
       "create": {
         "usage": "gh gist create [<filename>... | -] [flags]",
-        "inputs": [{ "name": "<filename>", "type": "string" }],
+        "inputs": [{ "name": "<filename>", "type": "shell" }],
         "description": "Create a new GitHub gist with given contents.",
         "flags": [
           {
@@ -567,7 +567,7 @@
       "delete": {
         "usage": "gh gist delete {<id> | <url>}",
         "inputs": [
-          { "name": "<id> | <url>", "type": "string", "multiple": true }
+          { "name": "<id> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Delete a gist",
         "flags": []
@@ -577,7 +577,7 @@
         "inputs": [
           {
             "name": "<id> | <url>} [<filename>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -608,7 +608,7 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of gists to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--public"],
@@ -625,7 +625,7 @@
       "view": {
         "usage": "gh gist view [<id> | <url>] [flags]",
         "inputs": [
-          { "name": "<id> | <url>", "type": "string", "multiple": true }
+          { "name": "<id> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "View the given gist or select from recent gists.",
         "flags": [
@@ -664,7 +664,7 @@
           {
             "names": ["-a", "--assignee"],
             "description": "Assign people by their login. Use \"@me\" to self-assign.",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["-b", "--body"],
@@ -674,22 +674,22 @@
           {
             "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["-l", "--label"],
             "description": "Add labels by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["-m", "--milestone"],
             "description": "Add the issue to a milestone by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["-p", "--project"],
             "description": "Add the issue to projects by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--recover"],
@@ -731,12 +731,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-l", "--label"],
@@ -746,7 +746,7 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of issues to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--mention"],
@@ -761,7 +761,7 @@
           {
             "names": ["-S", "--search"],
             "description": "Search issues with query",
-            "input": { "name": "<query>", "type": "string" }
+            "input": { "name": "<query>", "type": "shell" }
           },
           {
             "names": ["-s", "--state"],
@@ -788,12 +788,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-t", "--template"],
@@ -805,7 +805,7 @@
       "close": {
         "usage": "gh issue close {<number> | <url>} [flags]",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Close issue",
         "flags": [
@@ -824,19 +824,19 @@
       "comment": {
         "usage": "gh issue comment {<number> | <url>} [flags]",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Add a comment to a GitHub issue.",
         "flags": [
           {
             "names": ["-b", "--body"],
             "description": "The comment body text",
-            "input": { "name": "<text>", "type": "string" }
+            "input": { "name": "<text>", "type": "shell" }
           },
           {
             "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["--edit-last"],
@@ -858,7 +858,7 @@
       "delete": {
         "usage": "gh issue delete {<number> | <url>} [flags]",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Delete issue",
         "flags": [
@@ -872,7 +872,7 @@
       "develop": {
         "usage": "gh issue develop [flags] {<number> | <url>}",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Manage linked branches for an issue",
         "flags": [
@@ -906,24 +906,24 @@
       "edit": {
         "usage": "gh issue edit {<number> | <url>} [flags]",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Edit an issue.",
         "flags": [
           {
             "names": ["--add-assignee"],
             "description": "Add assigned users by their login. Use \"@me\" to assign yourself.",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["--add-label"],
             "description": "Add labels by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--add-project"],
             "description": "Add the issue to projects by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["-b", "--body"],
@@ -933,27 +933,27 @@
           {
             "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["-m", "--milestone"],
             "description": "Edit the milestone the issue belongs to by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--remove-assignee"],
             "description": "Remove assigned users by their login. Use \"@me\" to unassign yourself.",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["--remove-label"],
             "description": "Remove labels by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--remove-project"],
             "description": "Remove the issue from projects by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["-t", "--title"],
@@ -965,7 +965,7 @@
       "lock": {
         "usage": "gh issue lock {<number> | <url>} [flags]",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Lock issue conversation",
         "flags": [
@@ -979,7 +979,7 @@
       "pin": {
         "usage": "gh issue pin {<number> | <url>}",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Pin an issue to a repository.",
         "flags": []
@@ -987,7 +987,7 @@
       "reopen": {
         "usage": "gh issue reopen {<number> | <url>} [flags]",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Reopen issue",
         "flags": [
@@ -1001,8 +1001,8 @@
       "transfer": {
         "usage": "gh issue transfer {<number> | <url>} <destination-repo>",
         "inputs": [
-          { "name": "<number> | <url>} <destination-repo>", "type": "string" },
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>} <destination-repo>", "type": "shell" },
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Transfer issue to another repository",
         "flags": []
@@ -1010,7 +1010,7 @@
       "unlock": {
         "usage": "gh issue unlock {<number> | <url>}",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Unlock issue conversation",
         "flags": []
@@ -1018,7 +1018,7 @@
       "unpin": {
         "usage": "gh issue unpin {<number> | <url>}",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Unpin an issue from a repository.",
         "flags": []
@@ -1026,7 +1026,7 @@
       "view": {
         "usage": "gh issue view {<number> | <url>} [flags]",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Display the title, body, and other information about an issue.",
         "flags": [
@@ -1038,12 +1038,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-t", "--template"],
@@ -1070,12 +1070,12 @@
           {
             "names": ["-a", "--assignee"],
             "description": "Assign people by their login. Use \"@me\" to self-assign.",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["-B", "--base"],
             "description": "The branch into which you want your code merged",
-            "input": { "name": "<branch>", "type": "string" }
+            "input": { "name": "<branch>", "type": "shell" }
           },
           {
             "names": ["-b", "--body"],
@@ -1085,7 +1085,7 @@
           {
             "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["-d", "--draft"],
@@ -1100,17 +1100,17 @@
           {
             "names": ["-H", "--head"],
             "description": "The branch that contains commits for your pull request (default: current branch)",
-            "input": { "name": "<branch>", "type": "string" }
+            "input": { "name": "<branch>", "type": "shell" }
           },
           {
             "names": ["-l", "--label"],
             "description": "Add labels by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["-m", "--milestone"],
             "description": "Add the pull request to a milestone by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--no-maintainer-edit"],
@@ -1120,7 +1120,7 @@
           {
             "names": ["-p", "--project"],
             "description": "Add the pull request to projects by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--recover"],
@@ -1130,7 +1130,7 @@
           {
             "names": ["-r", "--reviewer"],
             "description": "Request reviews from people or teams by their handle",
-            "input": { "name": "<handle>", "type": "string" }
+            "input": { "name": "<handle>", "type": "shell" }
           },
           {
             "names": ["-t", "--title"],
@@ -1182,12 +1182,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-l", "--label"],
@@ -1197,12 +1197,12 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of items to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["-S", "--search"],
             "description": "Search pull requests with query",
-            "input": { "name": "<query>", "type": "string" }
+            "input": { "name": "<query>", "type": "shell" }
           },
           {
             "names": ["-s", "--state"],
@@ -1234,12 +1234,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-t", "--template"],
@@ -1253,7 +1253,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1286,7 +1286,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1295,7 +1295,7 @@
           {
             "names": ["-i", "--interval", "--watch"],
             "description": "Refresh interval in seconds when using --watch flag",
-            "input": { "name": "<--watch>", "type": "string" }
+            "input": { "name": "<--watch>", "type": "shell" }
           },
           {
             "names": ["--required"],
@@ -1319,7 +1319,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1342,7 +1342,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1351,12 +1351,12 @@
           {
             "names": ["-b", "--body"],
             "description": "The comment body text",
-            "input": { "name": "<text>", "type": "string" }
+            "input": { "name": "<text>", "type": "shell" }
           },
           {
             "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["--edit-last"],
@@ -1380,7 +1380,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1413,7 +1413,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1422,27 +1422,27 @@
           {
             "names": ["--add-assignee"],
             "description": "Add assigned users by their login. Use \"@me\" to assign yourself.",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["--add-label"],
             "description": "Add labels by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--add-project"],
             "description": "Add the pull request to projects by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--add-reviewer"],
             "description": "Add reviewers by their login.",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["-B", "--base"],
             "description": "Change the base branch for this pull request",
-            "input": { "name": "<branch>", "type": "string" }
+            "input": { "name": "<branch>", "type": "shell" }
           },
           {
             "names": ["-b", "--body"],
@@ -1452,32 +1452,32 @@
           {
             "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["-m", "--milestone"],
             "description": "Edit the milestone the pull request belongs to by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--remove-assignee"],
             "description": "Remove assigned users by their login. Use \"@me\" to unassign yourself.",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["--remove-label"],
             "description": "Remove labels by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--remove-project"],
             "description": "Remove the pull request from projects by name",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--remove-reviewer"],
             "description": "Remove reviewers by their login.",
-            "input": { "name": "<login>", "type": "string" }
+            "input": { "name": "<login>", "type": "shell" }
           },
           {
             "names": ["-t", "--title"],
@@ -1489,7 +1489,7 @@
       "lock": {
         "usage": "gh pr lock {<number> | <url>} [flags]",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Lock pull request conversation",
         "flags": [
@@ -1505,7 +1505,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1519,7 +1519,7 @@
           {
             "names": ["-A", "--author-email"],
             "description": "Email text for merge commit author",
-            "input": { "name": "<text>", "type": "string" }
+            "input": { "name": "<text>", "type": "shell" }
           },
           {
             "names": ["--auto"],
@@ -1529,12 +1529,12 @@
           {
             "names": ["-b", "--body"],
             "description": "Body text for the merge commit",
-            "input": { "name": "<text>", "type": "string" }
+            "input": { "name": "<text>", "type": "shell" }
           },
           {
             "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["-d", "--delete-branch"],
@@ -1549,7 +1549,7 @@
           {
             "names": ["--match-head-commit"],
             "description": "Commit SHA that the pull request head must match to allow merge",
-            "input": { "name": "<SHA>", "type": "string" }
+            "input": { "name": "<SHA>", "type": "shell" }
           },
           {
             "names": ["-m", "--merge"],
@@ -1569,7 +1569,7 @@
           {
             "names": ["-t", "--subject"],
             "description": "Subject text for the merge commit",
-            "input": { "name": "<text>", "type": "string" }
+            "input": { "name": "<text>", "type": "shell" }
           }
         ]
       },
@@ -1578,7 +1578,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1596,7 +1596,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1614,7 +1614,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1633,7 +1633,7 @@
           {
             "names": ["-F", "--body-file"],
             "description": "Read body text from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["-c", "--comment"],
@@ -1650,7 +1650,7 @@
       "unlock": {
         "usage": "gh pr unlock {<number> | <url>}",
         "inputs": [
-          { "name": "<number> | <url>", "type": "string", "multiple": true }
+          { "name": "<number> | <url>", "type": "shell", "multiple": true }
         ],
         "description": "Unlock pull request conversation",
         "flags": []
@@ -1660,7 +1660,7 @@
         "inputs": [
           {
             "name": "<number> | <url> | <branch>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -1674,12 +1674,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-t", "--template"],
@@ -1701,8 +1701,8 @@
       "create": {
         "usage": "gh release create [<tag>] [<files>...]",
         "inputs": [
-          { "name": "<tag>] [<files>", "type": "string" },
-          { "name": "<tag>", "type": "string", "multiple": true }
+          { "name": "<tag>] [<files>", "type": "shell" },
+          { "name": "<tag>", "type": "shell", "multiple": true }
         ],
         "description": "Create a new GitHub Release for a repository.",
         "flags": [
@@ -1734,7 +1734,7 @@
           {
             "names": ["-F", "--notes-file"],
             "description": "Read release notes from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["--notes-start-tag"],
@@ -1749,7 +1749,7 @@
           {
             "names": ["--target"],
             "description": "Target branch or full commit SHA (default: main branch)",
-            "input": { "name": "<branch>", "type": "string" }
+            "input": { "name": "<branch>", "type": "shell" }
           },
           {
             "names": ["-t", "--title"],
@@ -1781,13 +1781,13 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of items to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           }
         ]
       },
       "delete": {
         "usage": "gh release delete <tag> [flags]",
-        "inputs": [{ "name": "<tag>", "type": "string" }],
+        "inputs": [{ "name": "<tag>", "type": "shell" }],
         "description": "Delete a release",
         "flags": [
           {
@@ -1804,7 +1804,7 @@
       },
       "delete-asset": {
         "usage": "gh release delete-asset <tag> <asset-name> [flags]",
-        "inputs": [{ "name": "<tag> <asset-name>", "type": "string" }],
+        "inputs": [{ "name": "<tag> <asset-name>", "type": "shell" }],
         "description": "Delete an asset from a release",
         "flags": [
           {
@@ -1816,13 +1816,13 @@
       },
       "download": {
         "usage": "gh release download [<tag>] [flags]",
-        "inputs": [{ "name": "<tag>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<tag>", "type": "shell", "multiple": true }],
         "description": "Download assets from a GitHub release.",
         "flags": [
           {
             "names": ["-A", "--archive"],
             "description": "Download the source code archive in the specified format (zip or tar.gz)",
-            "input": { "name": "<format>", "type": "string" }
+            "input": { "name": "<format>", "type": "shell" }
           },
           {
             "names": ["--clobber"],
@@ -1832,12 +1832,12 @@
           {
             "names": ["-D", "--dir"],
             "description": "The directory to download files into",
-            "input": { "name": "<directory>", "type": "string" }
+            "input": { "name": "<directory>", "type": "shell" }
           },
           {
             "names": ["-O", "--output"],
             "description": "The file to write a single asset to (use \"-\" to write to standard output)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["-p", "--pattern"],
@@ -1853,7 +1853,7 @@
       },
       "edit": {
         "usage": "gh release edit <tag>",
-        "inputs": [{ "name": "<tag>", "type": "string" }],
+        "inputs": [{ "name": "<tag>", "type": "shell" }],
         "description": "Edit a release",
         "flags": [
           {
@@ -1879,7 +1879,7 @@
           {
             "names": ["-F", "--notes-file"],
             "description": "Read release notes from file (use \"-\" to read from standard input)",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["--prerelease"],
@@ -1894,7 +1894,7 @@
           {
             "names": ["--target"],
             "description": "Target branch or full commit SHA (default: main branch)",
-            "input": { "name": "<branch>", "type": "string" }
+            "input": { "name": "<branch>", "type": "shell" }
           },
           {
             "names": ["-t", "--title"],
@@ -1905,7 +1905,7 @@
       },
       "upload": {
         "usage": "gh release upload <tag> <files>... [flags]",
-        "inputs": [{ "name": "<tag> <files>", "type": "string" }],
+        "inputs": [{ "name": "<tag> <files>", "type": "shell" }],
         "description": "Upload asset files to a GitHub Release.",
         "flags": [
           {
@@ -1917,18 +1917,18 @@
       },
       "view": {
         "usage": "gh release view [<tag>] [flags]",
-        "inputs": [{ "name": "<tag>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<tag>", "type": "shell", "multiple": true }],
         "description": "View information about a GitHub Release.",
         "flags": [
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-t", "--template"],
@@ -1949,7 +1949,7 @@
     "subcommands": {
       "create": {
         "usage": "gh repo create [<name>] [flags]",
-        "inputs": [{ "name": "<name>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<name>", "type": "shell", "multiple": true }],
         "description": "Create a new GitHub repository.",
         "flags": [
           {
@@ -1985,7 +1985,7 @@
           {
             "names": ["-h", "--homepage"],
             "description": "Repository home page URL",
-            "input": { "name": "<URL>", "type": "string" }
+            "input": { "name": "<URL>", "type": "shell" }
           },
           {
             "names": ["--include-all-branches"],
@@ -2030,18 +2030,18 @@
           {
             "names": ["-t", "--team"],
             "description": "The name of the organization team to be granted access",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["-p", "--template"],
             "description": "Make the new repository based on a template repository",
-            "input": { "name": "<repository>", "type": "string" }
+            "input": { "name": "<repository>", "type": "shell" }
           }
         ]
       },
       "list": {
         "usage": "gh repo list [<owner>] [flags]",
-        "inputs": [{ "name": "<owner>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<owner>", "type": "shell", "multiple": true }],
         "description": "List repositories owned by user or organization",
         "flags": [
           {
@@ -2057,12 +2057,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-l", "--language"],
@@ -2072,7 +2072,7 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of repositories to list",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--no-archived"],
@@ -2104,7 +2104,7 @@
       "archive": {
         "usage": "gh repo archive [<repository>] [flags]",
         "inputs": [
-          { "name": "<repository>", "type": "string", "multiple": true }
+          { "name": "<repository>", "type": "shell", "multiple": true }
         ],
         "description": "Archive a GitHub repository.",
         "flags": [
@@ -2120,9 +2120,9 @@
         "inputs": [
           {
             "name": "<repository> [<directory>] [-- <gitflags>",
-            "type": "string"
+            "type": "shell"
           },
-          { "name": "<directory>", "type": "string", "multiple": true }
+          { "name": "<directory>", "type": "shell", "multiple": true }
         ],
         "description": null,
         "flags": [
@@ -2136,7 +2136,7 @@
       "delete": {
         "usage": "gh repo delete [<repository>] [flags]",
         "inputs": [
-          { "name": "<repository>", "type": "string", "multiple": true }
+          { "name": "<repository>", "type": "shell", "multiple": true }
         ],
         "description": "Delete a GitHub repository.",
         "flags": [
@@ -2151,7 +2151,7 @@
       "edit": {
         "usage": "gh repo edit [<repository>] [flags]",
         "inputs": [
-          { "name": "<repository>", "type": "string", "multiple": true }
+          { "name": "<repository>", "type": "shell", "multiple": true }
         ],
         "description": "Edit repository settings.",
         "flags": [
@@ -2173,7 +2173,7 @@
           {
             "names": ["--default-branch"],
             "description": "Set the default branch name for the repository",
-            "input": { "name": "<name>", "type": "string" }
+            "input": { "name": "<name>", "type": "shell" }
           },
           {
             "names": ["--delete-branch-on-merge"],
@@ -2228,7 +2228,7 @@
           {
             "names": ["-h", "--homepage"],
             "description": "Repository home page URL",
-            "input": { "name": "<URL>", "type": "string" }
+            "input": { "name": "<URL>", "type": "shell" }
           },
           {
             "names": ["--remove-topic"],
@@ -2250,8 +2250,8 @@
       "fork": {
         "usage": "gh repo fork [<repository>] [-- <gitflags>...] [flags]",
         "inputs": [
-          { "name": "<repository>] [-- <gitflags>", "type": "string" },
-          { "name": "<repository>", "type": "string", "multiple": true }
+          { "name": "<repository>] [-- <gitflags>", "type": "shell" },
+          { "name": "<repository>", "type": "shell", "multiple": true }
         ],
         "description": "Create a fork of a repository.",
         "flags": [
@@ -2289,15 +2289,13 @@
       },
       "rename": {
         "usage": "gh repo rename [<new-name>] [flags]",
-        "inputs": [
-          { "name": "<new-name>", "type": "string", "multiple": true }
-        ],
+        "inputs": [{ "name": "<new-name>", "type": "shell", "multiple": true }],
         "description": "Rename a GitHub repository.",
         "flags": [
           {
             "names": ["-R", "--repo"],
             "description": "Select another repository using the [HOST/]OWNER/REPO format",
-            "input": { "name": "<[HOST/]OWNER/REPO>", "type": "string" }
+            "input": { "name": "<[HOST/]OWNER/REPO>", "type": "shell" }
           },
           {
             "names": ["-y", "--yes"],
@@ -2309,7 +2307,7 @@
       "set-default": {
         "usage": "gh repo set-default [<repository>] [flags]",
         "inputs": [
-          { "name": "<repository>", "type": "string", "multiple": true }
+          { "name": "<repository>", "type": "shell", "multiple": true }
         ],
         "description": "This command sets the default remote repository to use when querying the\nGitHub API for the locally cloned repository.",
         "flags": [
@@ -2330,7 +2328,7 @@
         "inputs": [
           {
             "name": "<destination-repository>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -2356,7 +2354,7 @@
       "unarchive": {
         "usage": "gh repo unarchive [<repository>] [flags]",
         "inputs": [
-          { "name": "<repository>", "type": "string", "multiple": true }
+          { "name": "<repository>", "type": "shell", "multiple": true }
         ],
         "description": "Unarchive a GitHub repository.",
         "flags": [
@@ -2370,7 +2368,7 @@
       "view": {
         "usage": "gh repo view [<repository>] [flags]",
         "inputs": [
-          { "name": "<repository>", "type": "string", "multiple": true }
+          { "name": "<repository>", "type": "shell", "multiple": true }
         ],
         "description": "Display the description and the README of a GitHub repository.",
         "flags": [
@@ -2382,12 +2380,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-t", "--template"],
@@ -2408,13 +2406,13 @@
     "subcommands": {
       "cancel": {
         "usage": "gh run cancel [<run-id>]",
-        "inputs": [{ "name": "<run-id>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<run-id>", "type": "shell", "multiple": true }],
         "description": "Cancel a workflow run",
         "flags": []
       },
       "download": {
         "usage": "gh run download [<run-id>] [flags]",
-        "inputs": [{ "name": "<run-id>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<run-id>", "type": "shell", "multiple": true }],
         "description": "Download artifacts generated by a GitHub Actions workflow run.",
         "flags": [
           {
@@ -2447,17 +2445,17 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of runs to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["-t", "--template"],
@@ -2478,7 +2476,7 @@
       },
       "rerun": {
         "usage": "gh run rerun [<run-id>] [flags]",
-        "inputs": [{ "name": "<run-id>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<run-id>", "type": "shell", "multiple": true }],
         "description": "Rerun a failed run",
         "flags": [
           {
@@ -2500,7 +2498,7 @@
       },
       "view": {
         "usage": "gh run view [<run-id>] [flags]",
-        "inputs": [{ "name": "<run-id>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<run-id>", "type": "shell", "multiple": true }],
         "description": "View a summary of a workflow run",
         "flags": [
           {
@@ -2516,12 +2514,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["--log"],
@@ -2552,7 +2550,7 @@
       },
       "watch": {
         "usage": "gh run watch <run-id> [flags]",
-        "inputs": [{ "name": "<run-id>", "type": "string" }],
+        "inputs": [{ "name": "<run-id>", "type": "shell" }],
         "description": "Watch a run until it completes, showing its progress",
         "flags": [
           {
@@ -2563,7 +2561,7 @@
           {
             "names": ["-i", "--interval"],
             "description": "Refresh interval in seconds",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           }
         ]
       }
@@ -2577,7 +2575,7 @@
         "inputs": [
           {
             "name": "<workflow-id> | <workflow-name>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -2589,7 +2587,7 @@
         "inputs": [
           {
             "name": "<workflow-id> | <workflow-name>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -2609,7 +2607,7 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of workflows to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           }
         ]
       },
@@ -2618,7 +2616,7 @@
         "inputs": [
           {
             "name": "<workflow-id> | <workflow-name>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -2627,7 +2625,7 @@
           {
             "names": ["-F", "--field"],
             "description": "Add a string parameter in key=value format, respecting @ syntax",
-            "input": { "name": "<key=value>", "type": "string" }
+            "input": { "name": "<key=value>", "type": "shell" }
           },
           {
             "names": ["--json"],
@@ -2637,7 +2635,7 @@
           {
             "names": ["-f", "--raw-field"],
             "description": "Add a string parameter in key=value format",
-            "input": { "name": "<key=value>", "type": "string" }
+            "input": { "name": "<key=value>", "type": "shell" }
           },
           {
             "names": ["-r", "--ref"],
@@ -2651,7 +2649,7 @@
         "inputs": [
           {
             "name": "<workflow-id> | <workflow-name> | <filename>",
-            "type": "string",
+            "type": "shell",
             "multiple": true
           }
         ],
@@ -2681,7 +2679,7 @@
     "subcommands": {
       "delete": {
         "usage": "gh alias delete <alias>",
-        "inputs": [{ "name": "<alias>", "type": "string" }],
+        "inputs": [{ "name": "<alias>", "type": "shell" }],
         "description": "Delete an alias",
         "flags": []
       },
@@ -2693,7 +2691,7 @@
       },
       "set": {
         "usage": "gh alias set <alias> <expansion> [flags]",
-        "inputs": [{ "name": "<alias> <expansion>", "type": "string" }],
+        "inputs": [{ "name": "<alias> <expansion>", "type": "shell" }],
         "description": "Define a word that will expand to a full gh command when invoked.",
         "flags": [
           {
@@ -2712,7 +2710,7 @@
     "subcommands": {
       "get": {
         "usage": "gh config get <key> [flags]",
-        "inputs": [{ "name": "<key>", "type": "string" }],
+        "inputs": [{ "name": "<key>", "type": "shell" }],
         "description": "Print the value of a given configuration key",
         "flags": [
           {
@@ -2736,7 +2734,7 @@
       },
       "set": {
         "usage": "gh config set <key> <value> [flags]",
-        "inputs": [{ "name": "<key> <value>", "type": "string" }],
+        "inputs": [{ "name": "<key> <value>", "type": "shell" }],
         "description": "Update configuration with a value for the given key",
         "flags": [
           {
@@ -2770,7 +2768,7 @@
       },
       "create": {
         "usage": "gh extension create [<name>] [flags]",
-        "inputs": [{ "name": "<name>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<name>", "type": "shell", "multiple": true }],
         "description": "Create a new extension",
         "flags": [
           {
@@ -2782,13 +2780,13 @@
       },
       "exec": {
         "usage": "gh extension exec <name> [args]",
-        "inputs": [{ "name": "<name>", "type": "string" }],
+        "inputs": [{ "name": "<name>", "type": "shell" }],
         "description": "Execute an extension using the short name. For example, if the extension repository is\n\"owner/gh-extension\", you should pass \"extension\". You can use this command when\nthe short name conflicts with a core gh command.",
         "flags": []
       },
       "install": {
         "usage": "gh extension install <repository> [flags]",
-        "inputs": [{ "name": "<repository>", "type": "string" }],
+        "inputs": [{ "name": "<repository>", "type": "shell" }],
         "description": "Install a GitHub repository locally as a GitHub CLI extension.",
         "flags": [
           {
@@ -2806,24 +2804,24 @@
       },
       "remove": {
         "usage": "gh extension remove <name>",
-        "inputs": [{ "name": "<name>", "type": "string" }],
+        "inputs": [{ "name": "<name>", "type": "shell" }],
         "description": "Remove an installed extension",
         "flags": []
       },
       "search": {
         "usage": "gh extension search [<query>] [flags]",
-        "inputs": [{ "name": "<query>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<query>", "type": "shell", "multiple": true }],
         "description": "Search for gh extensions.",
         "flags": [
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["--license"],
@@ -2833,7 +2831,7 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of extensions to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--order"],
@@ -2891,9 +2889,7 @@
     "subcommands": {
       "add": {
         "usage": "gh gpg-key add [<key-file>] [flags]",
-        "inputs": [
-          { "name": "<key-file>", "type": "string", "multiple": true }
-        ],
+        "inputs": [{ "name": "<key-file>", "type": "shell", "multiple": true }],
         "description": "Add a GPG key to your GitHub account",
         "flags": [
           {
@@ -2905,7 +2901,7 @@
       },
       "delete": {
         "usage": "gh gpg-key delete <key-id> [flags]",
-        "inputs": [{ "name": "<key-id>", "type": "string" }],
+        "inputs": [{ "name": "<key-id>", "type": "shell" }],
         "description": "Delete a GPG key from your GitHub account",
         "flags": [
           {
@@ -2928,7 +2924,7 @@
     "subcommands": {
       "clone": {
         "usage": "gh label clone <source-repository> [flags]",
-        "inputs": [{ "name": "<source-repository>", "type": "string" }],
+        "inputs": [{ "name": "<source-repository>", "type": "shell" }],
         "description": "Clones labels from a source repository to a destination repository on GitHub.\nBy default, the destination repository is the current repository.",
         "flags": [
           {
@@ -2940,7 +2936,7 @@
       },
       "create": {
         "usage": "gh label create <name> [flags]",
-        "inputs": [{ "name": "<name>", "type": "string" }],
+        "inputs": [{ "name": "<name>", "type": "shell" }],
         "description": "Create a new label on GitHub, or updates an existing one with --force.",
         "flags": [
           {
@@ -2962,7 +2958,7 @@
       },
       "delete": {
         "usage": "gh label delete <name> [flags]",
-        "inputs": [{ "name": "<name>", "type": "string" }],
+        "inputs": [{ "name": "<name>", "type": "shell" }],
         "description": "Delete a label from a repository",
         "flags": [
           {
@@ -2974,7 +2970,7 @@
       },
       "edit": {
         "usage": "gh label edit <name> [flags]",
-        "inputs": [{ "name": "<name>", "type": "string" }],
+        "inputs": [{ "name": "<name>", "type": "shell" }],
         "description": "Update a label on GitHub.",
         "flags": [
           {
@@ -3002,17 +2998,17 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of labels to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--order"],
@@ -3048,7 +3044,7 @@
     "subcommands": {
       "commits": {
         "usage": "gh search commits [<query>] [flags]",
-        "inputs": [{ "name": "<query>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<query>", "type": "shell", "multiple": true }],
         "description": "Search for commits on GitHub.",
         "flags": [
           {
@@ -3059,7 +3055,7 @@
           {
             "names": ["--author-date"],
             "description": "Filter based on authored date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--author-email"],
@@ -3079,7 +3075,7 @@
           {
             "names": ["--committer-date"],
             "description": "Filter based on committed date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--committer-email"],
@@ -3099,17 +3095,17 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of commits to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--merge"],
@@ -3165,7 +3161,7 @@
       },
       "issues": {
         "usage": "gh search issues [<query>] [flags]",
-        "inputs": [{ "name": "<query>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<query>", "type": "shell", "multiple": true }],
         "description": "Search for issues on GitHub.",
         "flags": [
           {
@@ -3191,22 +3187,22 @@
           {
             "names": ["--closed"],
             "description": "Filter on closed at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--commenter"],
             "description": "Filter based on comments by user",
-            "input": { "name": "<user>", "type": "string" }
+            "input": { "name": "<user>", "type": "shell" }
           },
           {
             "names": ["--comments"],
             "description": "Filter on number of comments",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--created"],
             "description": "Filter based on created at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--include-prs"],
@@ -3216,22 +3212,22 @@
           {
             "names": ["--interactions"],
             "description": "Filter on number of reactions and comments",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--involves"],
             "description": "Filter based on involvement of user",
-            "input": { "name": "<user>", "type": "string" }
+            "input": { "name": "<user>", "type": "shell" }
           },
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["--label"],
@@ -3246,7 +3242,7 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of results to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--locked"],
@@ -3261,12 +3257,12 @@
           {
             "names": ["--mentions"],
             "description": "Filter based on user mentions",
-            "input": { "name": "<user>", "type": "string" }
+            "input": { "name": "<user>", "type": "shell" }
           },
           {
             "names": ["--milestone"],
             "description": "Filter by milestone title",
-            "input": { "name": "<title>", "type": "string" }
+            "input": { "name": "<title>", "type": "shell" }
           },
           {
             "names": ["--no-assignee"],
@@ -3301,12 +3297,12 @@
           {
             "names": ["--project"],
             "description": "Filter on project board number",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--reactions"],
             "description": "Filter on number of reactions",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--repo"],
@@ -3336,7 +3332,7 @@
           {
             "names": ["--updated"],
             "description": "Filter on last updated at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--visibility"],
@@ -3352,7 +3348,7 @@
       },
       "prs": {
         "usage": "gh search prs [<query>] [flags]",
-        "inputs": [{ "name": "<query>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<query>", "type": "shell", "multiple": true }],
         "description": "Search for pull requests on GitHub.",
         "flags": [
           {
@@ -3388,22 +3384,22 @@
           {
             "names": ["--closed"],
             "description": "Filter on closed at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--commenter"],
             "description": "Filter based on comments by user",
-            "input": { "name": "<user>", "type": "string" }
+            "input": { "name": "<user>", "type": "shell" }
           },
           {
             "names": ["--comments"],
             "description": "Filter on number of comments",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--created"],
             "description": "Filter based on created at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--draft"],
@@ -3418,22 +3414,22 @@
           {
             "names": ["--interactions"],
             "description": "Filter on number of reactions and comments",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--involves"],
             "description": "Filter based on involvement of user",
-            "input": { "name": "<user>", "type": "string" }
+            "input": { "name": "<user>", "type": "shell" }
           },
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["--label"],
@@ -3448,7 +3444,7 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of results to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--locked"],
@@ -3463,7 +3459,7 @@
           {
             "names": ["--mentions"],
             "description": "Filter based on user mentions",
-            "input": { "name": "<user>", "type": "string" }
+            "input": { "name": "<user>", "type": "shell" }
           },
           {
             "names": ["--merged"],
@@ -3473,12 +3469,12 @@
           {
             "names": ["--merged-at"],
             "description": "Filter on merged at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--milestone"],
             "description": "Filter by milestone title",
-            "input": { "name": "<title>", "type": "string" }
+            "input": { "name": "<title>", "type": "shell" }
           },
           {
             "names": ["--no-assignee"],
@@ -3513,12 +3509,12 @@
           {
             "names": ["--project"],
             "description": "Filter on project board number",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--reactions"],
             "description": "Filter on number of reactions",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--repo"],
@@ -3533,12 +3529,12 @@
           {
             "names": ["--review-requested"],
             "description": "Filter on user or team requested to review",
-            "input": { "name": "<user>", "type": "string" }
+            "input": { "name": "<user>", "type": "shell" }
           },
           {
             "names": ["--reviewed-by"],
             "description": "Filter on user who reviewed",
-            "input": { "name": "<user>", "type": "string" }
+            "input": { "name": "<user>", "type": "shell" }
           },
           {
             "names": ["--sort"],
@@ -3563,7 +3559,7 @@
           {
             "names": ["--updated"],
             "description": "Filter on last updated at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--visibility"],
@@ -3579,7 +3575,7 @@
       },
       "repos": {
         "usage": "gh search repos [<query>] [flags]",
-        "inputs": [{ "name": "<query>", "type": "string", "multiple": true }],
+        "inputs": [{ "name": "<query>", "type": "shell", "multiple": true }],
         "description": "Search for repositories on GitHub.",
         "flags": [
           {
@@ -3590,27 +3586,27 @@
           {
             "names": ["--created"],
             "description": "Filter based on created at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--followers"],
             "description": "Filter based on number of followers",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--forks"],
             "description": "Filter on number of forks",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--good-first-issues"],
             "description": "Filter on number of issues with the 'good first issue' label",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--help-wanted-issues"],
             "description": "Filter on number of issues with the 'help wanted' label",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--include-forks"],
@@ -3620,12 +3616,12 @@
           {
             "names": ["-q", "--jq"],
             "description": "Filter JSON output using a jq expression",
-            "input": { "name": "<expression>", "type": "string" }
+            "input": { "name": "<expression>", "type": "shell" }
           },
           {
             "names": ["--json"],
             "description": "Output JSON with the specified fields",
-            "input": { "name": "<fields>", "type": "string" }
+            "input": { "name": "<fields>", "type": "shell" }
           },
           {
             "names": ["--language"],
@@ -3640,7 +3636,7 @@
           {
             "names": ["-L", "--limit"],
             "description": "Maximum number of repositories to fetch",
-            "input": { "name": "<int>", "type": "string" }
+            "input": { "name": "<int>", "type": "shell" }
           },
           {
             "names": ["--match"],
@@ -3650,7 +3646,7 @@
           {
             "names": ["--number-topics"],
             "description": "Filter on number of topics",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["--order"],
@@ -3675,7 +3671,7 @@
           {
             "names": ["--stars"],
             "description": "Filter on number of stars",
-            "input": { "name": "<number>", "type": "string" }
+            "input": { "name": "<number>", "type": "shell" }
           },
           {
             "names": ["-t", "--template"],
@@ -3690,7 +3686,7 @@
           {
             "names": ["--updated"],
             "description": "Filter on last updated at date",
-            "input": { "name": "<date>", "type": "string" }
+            "input": { "name": "<date>", "type": "shell" }
           },
           {
             "names": ["--visibility"],
@@ -3711,7 +3707,7 @@
     "subcommands": {
       "delete": {
         "usage": "gh secret delete <secret-name> [flags]",
-        "inputs": [{ "name": "<secret-name>", "type": "string" }],
+        "inputs": [{ "name": "<secret-name>", "type": "shell" }],
         "description": "Delete a secret on one of the following levels:",
         "flags": [
           {
@@ -3765,7 +3761,7 @@
       },
       "set": {
         "usage": "gh secret set <secret-name> [flags]",
-        "inputs": [{ "name": "<secret-name>", "type": "string" }],
+        "inputs": [{ "name": "<secret-name>", "type": "shell" }],
         "description": "Set a value for a secret on one of the following levels:",
         "flags": [
           {
@@ -3781,12 +3777,12 @@
           {
             "names": ["-e", "--env"],
             "description": "Set deployment environment secret",
-            "input": { "name": "<environment>", "type": "string" }
+            "input": { "name": "<environment>", "type": "shell" }
           },
           {
             "names": ["-f", "--env-file"],
             "description": "Load secret names and values from a dotenv-formatted file",
-            "input": { "name": "<file>", "type": "string" }
+            "input": { "name": "<file>", "type": "shell" }
           },
           {
             "names": ["--no-store"],
@@ -3796,12 +3792,12 @@
           {
             "names": ["-o", "--org"],
             "description": "Set organization secret",
-            "input": { "name": "<organization>", "type": "string" }
+            "input": { "name": "<organization>", "type": "shell" }
           },
           {
             "names": ["-r", "--repos"],
             "description": "List of repositories that can access an organization or user secret",
-            "input": { "name": "<repositories>", "type": "string" }
+            "input": { "name": "<repositories>", "type": "shell" }
           },
           {
             "names": ["-u", "--user"],
@@ -3822,9 +3818,7 @@
     "subcommands": {
       "add": {
         "usage": "gh ssh-key add [<key-file>] [flags]",
-        "inputs": [
-          { "name": "<key-file>", "type": "string", "multiple": true }
-        ],
+        "inputs": [{ "name": "<key-file>", "type": "shell", "multiple": true }],
         "description": "Add an SSH key to your GitHub account",
         "flags": [
           {
@@ -3836,7 +3830,7 @@
       },
       "delete": {
         "usage": "gh ssh-key delete <id> [flags]",
-        "inputs": [{ "name": "<id>", "type": "string" }],
+        "inputs": [{ "name": "<id>", "type": "shell" }],
         "description": "Delete an SSH key from your GitHub account",
         "flags": [
           {
