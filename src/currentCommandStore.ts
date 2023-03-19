@@ -5,9 +5,9 @@ type CommandFlag = Flag & { value?: string; optionType: "flag" };
 
 type CommandOption = CommandInput | CommandFlag;
 
-type CommandStruct = {
+export type CommandStruct = {
   command: { name: string } & GHCommand;
-  subcommand?: { name: string } & Subcommand;
+  subcommand?: { inputValue?: string; name: string } & Subcommand;
   options?: CommandOption[];
 };
 
@@ -32,14 +32,18 @@ class CurrentCommand {
       return "";
     }
 
-    let commandString = `gh ${this.commandStruct.command.name}`;
+    const { command, subcommand, options } = this.commandStruct;
 
-    if (this.commandStruct.subcommand) {
-      commandString = `${commandString} ${this.commandStruct.subcommand.name}`;
+    let commandString = `gh ${command.name}`;
+
+    if (subcommand) {
+      commandString = `${commandString} ${subcommand.name}${
+        subcommand.inputValue ? ` ${subcommand.inputValue}` : ""
+      }`;
     }
 
-    if (this.commandStruct.options) {
-      commandString = `${commandString} ${this.commandStruct.options
+    if (options) {
+      commandString = `${commandString} ${options
         .map((option) => {
           if (isInput(option)) {
             return option.value;
@@ -63,11 +67,11 @@ class CurrentCommand {
     this.commandString = this.toString();
   }
 
-  addSubcommand(subcommandName: string, subcommand: Subcommand) {
+  addSubcommand(name: string, subcommand: Subcommand, inputValue?: string) {
     if (!this.commandStruct) {
       throw new Error("Missing command");
     }
-    this.commandStruct.subcommand = { ...subcommand, name: subcommandName };
+    this.commandStruct.subcommand = { ...subcommand, name: name, inputValue };
     this.commandString = this.toString();
   }
 

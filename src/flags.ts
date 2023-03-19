@@ -2,7 +2,11 @@ import { window } from "vscode";
 import { currentCommand } from "./currentCommandStore";
 import { Flag, Subcommand } from "./gh.types";
 import { getInputName } from "./inputs";
-import { createQuickPickMenu } from "./quickpick";
+import {
+  createQuickPickMenu,
+  isExecuteOption,
+  isGoBackOption,
+} from "./quickpick";
 
 async function writeFlagInput(flag: Flag) {
   if (!flag.names) {
@@ -32,7 +36,7 @@ export async function handleFlags(subcommand: Subcommand) {
   const flags = subcommand.flags;
 
   if (!flags) {
-    return;
+    return { isDone: true };
   }
 
   let done = false;
@@ -46,6 +50,7 @@ export async function handleFlags(subcommand: Subcommand) {
     const flag = await createQuickPickMenu(items, {
       title: "Select Flag",
       canExecute: true,
+      canGoBack: true,
       picked: "execute",
     });
 
@@ -53,15 +58,20 @@ export async function handleFlags(subcommand: Subcommand) {
       items = items.filter((item) => item !== flag);
     }
 
-    if (!flag || "isExecuteOption" in flag) {
-      done = true;
-      continue;
+    if (!flag || isExecuteOption(flag)) {
+      return { isDone: true };
+    }
+
+    if (isGoBackOption(flag)) {
+      currentCommand.goBack();
+      return { isDone: false };
     }
 
     let flagValue: string | undefined = undefined;
 
     if (flag.input) {
       flagValue = await writeFlagInput(flag);
+
       if (!flagValue && flag.input.required) {
         throw new Error("Required flag input not provided");
       }
@@ -69,4 +79,6 @@ export async function handleFlags(subcommand: Subcommand) {
 
     currentCommand.addFlag(flag, flagValue);
   }
+
+  return { isDone: true };
 }
