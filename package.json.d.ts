@@ -1,10 +1,18 @@
 interface Package {
   name: 'gh-cli-actions',
-  displayName: 'gh-cli-actions',
+  displayName: 'Github CLI Actions',
   description: 'Access Github CLI from command palette',
-  version: '1.0.0',
+  repository: {type: 'git', url: 'https://github.com/arcuo/gh-cli-actions.git'},
+  homepage: 'https://github.com/arcuo/gh-cli-actions',
+  bugs: {url: 'https://github.com/arcuo/gh-cli-actions/issues'},
+  author: 'Benjamin Zachariae',
+  publisher: 'arcuo',
+  license: 'MIT',
+  version: '1.1.0',
   engines: {vscode: '^1.76.0'},
+  icon: 'images/icon.png',
   categories: ['Other'],
+  keywords: ['github', 'cli', 'actions'],
   main: './out/main.js',
   contributes: {
     commands: [
@@ -43,14 +51,17 @@ interface Package {
     }
   },
   scripts: {
-    'vscode:prepublish': 'pnpm run compile-base --minify',
+    'vscode:prepublish': 'pnpm clean && pnpm run compile-base --minify',
     'compile-base': 'esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node',
-    compile: 'pnpm run compile-base --sourcemap',
-    watch: 'pnpm run compile-base --sourcemap --watch',
+    compile: 'pnpm clean && pnpm run compile-base --sourcemap',
+    watch: 'pnpm clean && pnpm run compile-base --sourcemap --watch',
     'test-compile': 'tsc -p ./',
     lint: 'eslint src --ext ts',
     precompile: 'npx ts-json-as-const ./package.json',
-    'fetch-gh-info': 'python3 ./scripts/fetch-gh-info.py'
+    'fetch-gh-info': 'python3 ./scripts/fetch-gh-info.py',
+    package: 'pnpm vsce package --no-dependencies',
+    publish: 'pnpm vsce publish --no-dependencies',
+    clean: 'rm -rf out'
   },
   devDependencies: {
     '@changesets/cli': '^2.26.0',
@@ -61,6 +72,7 @@ interface Package {
     '@typescript-eslint/eslint-plugin': '^5.49.0',
     '@typescript-eslint/parser': '^5.49.0',
     '@vscode/test-electron': '^2.2.2',
+    '@vscode/vsce': '^2.18.0',
     esbuild: '^0.17.11',
     eslint: '^8.33.0',
     glob: '^8.1.0',
