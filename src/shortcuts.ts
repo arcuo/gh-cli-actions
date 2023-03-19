@@ -14,8 +14,53 @@ function getShortcuts() {
   return shortcuts;
 }
 
+async function writeShortcut() {
+  const shortcutString = await vscode.window.showInputBox({
+    title: `Enter raw shortcut command`,
+    placeHolder: `e.g. "gh pr create --title 'My PR' --body 'My PR body' --draft"`,
+  });
+
+  if (!shortcutString) {
+    return;
+  }
+
+  return shortcutString;
+}
+
 export async function createNewShortcut() {
-  const shortcutCommand = await createGHCommand();
+  // Select creation method
+  const creationMethod = await createQuickPickMenu(
+    [
+      {
+        label: "Create shortcut from command palette",
+        description: "Create a shortcut from a command",
+        alwaysShow: true,
+        picked: true,
+        create: true,
+      },
+      {
+        label: "Manually write shortcut",
+        description: "Create a shortcut from a raw command",
+        alwaysShow: true,
+        raw: true,
+      },
+    ],
+    {
+      title: "Select a shortcut creation method",
+      canExecute: false,
+    }
+  );
+
+  if (!creationMethod) {
+    logAndInformError("Shortcut creation cancelled");
+    throw Error("Shortcut creation cancelled");
+  }
+
+  const shortcutCommand = creationMethod.create
+    ? await createGHCommand()
+    : creationMethod.raw
+    ? await writeShortcut()
+    : undefined;
 
   if (!shortcutCommand) {
     logAndInformError("Shortcut creation cancelled");
@@ -42,6 +87,8 @@ export async function createNewShortcut() {
   Config.set("ghShortcuts", shortcuts);
 
   logAndInform(`Shortcut created - ${name} : ${shortcutCommand}`);
+
+  runCommand(shortcutCommand);
 }
 
 async function selectShortcut() {
