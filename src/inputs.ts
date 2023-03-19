@@ -24,7 +24,7 @@ function wrapWithSquareBrackets(input: string) {
 export const getInputName = (input: Input) =>
   pipe(
     // [wrapWithQuotes, input.type === "string"],
-    [wrapWithBrackets, input.type === "shell"],
+    // [wrapWithBrackets, input.type === "shell"],
     [wrapWithSquareBrackets, !!input.multiple]
   )(input.name);
 
@@ -35,13 +35,13 @@ async function writeInput(input: Input) {
 
   let inputName = getInputName(input);
 
-  const helper = `${currentCommand.get()} ${inputName}`;
+  const commandString = `${currentCommand.get()} ${inputName}`;
 
   const inputString = await window.showInputBox({
-    title: `Enter input ${helper} ${
+    title: `Enter input "${commandString}" ${
       input.required ? "(required: true)" : "(Keep blank to skip input)"
     }`,
-    placeHolder: input.name,
+    placeHolder: inputName,
   });
 
   if (!inputString) {

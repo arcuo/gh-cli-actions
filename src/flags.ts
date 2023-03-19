@@ -54,10 +54,6 @@ export async function handleFlags(subcommand: Subcommand) {
       picked: "execute",
     });
 
-    if (flag && "input" in flag && !flag.input?.multiple) {
-      items = items.filter((item) => item !== flag);
-    }
-
     if (!flag || isExecuteOption(flag)) {
       return { isDone: true };
     }
@@ -75,6 +71,10 @@ export async function handleFlags(subcommand: Subcommand) {
       if (!flagValue && flag.input.required) {
         throw new Error("Required flag input not provided");
       }
+    }
+
+    if (!flag.input?.multiple) {
+      items = items.filter((item) => item !== flag);
     }
 
     currentCommand.addFlag(flag, flagValue);
