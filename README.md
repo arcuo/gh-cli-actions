@@ -4,15 +4,22 @@ Run Github CLI targets from the command palette.
 
 ## Features
 
+Commands, inputs, and flags are scraped from the [Github CLI manual](https://cli.github.com/manual/gh_api) and most are supported
+
 Run `gh` commands directly from the command palette. You can dynamically choose whether or not to run the command behind the scenes, in the terminal or just copy the output.
 
 ![run command](images/ghcli-run-command.gif)
 
 You can save and manage shortcuts to often used commands.
 
+### Shortcuts
+
+You can either build or manually write shortcuts to run from the command palette.
+
+If you write a manual shortcut and add a "{some text}" to a shortcut, you add inputs to the command so that you can add that manually when running the command.
+
 ![run command](images/ghcli-run-shortcut.gif)
 
-Commands, inputs, and flags are scraped from the [Github CLI manual](https://cli.github.com/manual/gh_api) and most are supported
 
 ## Requirements
 
@@ -35,7 +42,7 @@ This extension contributes the following settings:
 
 ## Potential future additions
 
-* Allow going back in a command (i.e. moving one step back in the command)
-* Allow adding inputs and/or flags to shortcuts. Allowing you to create shortcuts that you can still add input or flags to.
+* Allow going back in a command (i.e. moving one step back in the command) (Done)
+* Allow adding inputs and/or flags to shortcuts. Allowing you to create shortcuts that you can still add input or flags to. (Reading optionals done)
 * Grab specific options from manual scraping to allow inputs to have options.
 * Feel free to add issues with ideas.

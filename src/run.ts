@@ -122,7 +122,7 @@ export async function runCommand(_command: string) {
 
 async function fillOptionals(command: string): Promise<string> {
   let newCommand = command;
-  const optionals = command.match(/\{[a-zA-Z0-9]*}/g);
+  const optionals = command.match(/\{[a-zA-Z0-9|\s]*}/g);
 
   if (!optionals) {
     return command;

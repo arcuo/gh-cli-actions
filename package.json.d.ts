@@ -8,7 +8,7 @@ interface Package {
   author: 'Benjamin Zachariae',
   publisher: 'arcuo',
   license: 'MIT',
-  version: '1.1.0',
+  version: '1.2.0',
   engines: {vscode: '^1.76.0'},
   icon: 'images/icon.png',
   categories: ['Other'],
