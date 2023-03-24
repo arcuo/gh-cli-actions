@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2.0
+
+### Minor Changes
+
+- Added optional inputs to shortcuts
+
 ## 1.1.0
 
 ### Minor Changes

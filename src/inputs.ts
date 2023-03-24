@@ -77,7 +77,7 @@ async function selectOption(input: Input) {
   return option.label;
 }
 
-export async function selectSubcommandInput(inputs: Input[]) {
+export async function handleInputs(inputs: Input[]) {
   let inputsString = "";
   for (const i of inputs) {
     const inputString = i.options ? await selectOption(i) : await writeInput(i);

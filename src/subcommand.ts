@@ -1,6 +1,6 @@
 import { currentCommand } from "./currentCommandStore";
 import { GHCommand } from "./gh.types";
-import { selectSubcommandInput } from "./inputs";
+import { handleInputs } from "./inputs";
 import { createQuickPickMenu, isGoBackOption } from "./quickpick";
 
 export async function selectSubcommand(command: GHCommand) {
@@ -41,7 +41,7 @@ export async function selectSubcommand(command: GHCommand) {
 
   let inputValue: string | undefined = undefined;
   if (subcommand.inputs) {
-    inputValue = await selectSubcommandInput(subcommand.inputs);
+    inputValue = await handleInputs(subcommand.inputs);
   }
 
   currentCommand.addSubcommand(subcommand.name, subcommand, inputValue);

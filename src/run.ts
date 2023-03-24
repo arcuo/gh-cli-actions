@@ -8,6 +8,8 @@ import { selectCommand } from "./commands";
 import { Config } from "./configs";
 import { currentCommand } from "./currentCommandStore";
 import { handleFlags } from "./flags";
+import { Input } from "./gh.types";
+import { handleInputs } from "./inputs";
 import { logAndInform, logAndInformError, logError, logInfo } from "./logging";
 import { selectSubcommand } from "./subcommand";
 
@@ -47,10 +49,12 @@ export async function runCreateCommand(): Promise<string> {
   return currentCommand.get();
 }
 
-export async function runCommand(command: string) {
+export async function runCommand(_command: string) {
   vscode.workspace
     .getConfiguration("gh-cli-actions")
-    .update("lastCommand", command, vscode.ConfigurationTarget.Global);
+    .update("lastCommand", _command, vscode.ConfigurationTarget.Global);
+
+  let command = await fillOptionals(_command);
 
   const confirm = await vscode.window.showQuickPick(
     [
@@ -114,6 +118,34 @@ export async function runCommand(command: string) {
     vscode.env.clipboard.writeText(command);
     logAndInform(`Command copied to clipboard "${command}"`);
   }
+}
+
+async function fillOptionals(command: string): Promise<string> {
+  let newCommand = command;
+  const optionals = command.match(/\{[a-zA-Z0-9]*}/g);
+
+  if (!optionals) {
+    return command;
+  }
+
+  const inputs = optionals.map<Input>((opt) => {
+    return {
+      name: opt.replace(/\{/, "").replace(/\}/, ""),
+      required: true,
+      type: "shell",
+    };
+  });
+
+  for (const input of inputs) {
+    const inputString = await handleInputs([input]);
+    if (!inputString) {
+      throw new Error("Missing input");
+    }
+
+    newCommand = newCommand.replace(`{${input.name}}`, inputString);
+  }
+
+  return newCommand;
 }
 
 function showResultMessage(out: string, error: boolean) {
